@@ -1,0 +1,469 @@
+<!DOCTYPE html>
+<html lang="id">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Tentang Kami - Layanan Obat Asrama UNAI</title>
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+
+      body {
+        font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+        line-height: 1.6;
+        color: #333;
+        background-color: #f5f5f5;
+      }
+
+
+      .container {
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 20px;
+      }
+
+
+      /* Header & Navigation */
+      header {
+        background: #fff;
+        box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        position: sticky;
+        top: 0;
+        z-index: 1000;
+        padding: 1rem 0;
+        margin-bottom: 0;
+      }
+
+      nav {
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 0 2rem;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+      }
+
+      .logo {
+        font-size: 1.5rem;
+        font-weight: bold;
+        color: #2e7d32;
+        text-decoration: none;
+      }
+
+      .nav-links {
+        display: flex;
+        gap: 2rem;
+        list-style: none;
+      }
+
+      .nav-links a {
+        text-decoration: none;
+        color: #333;
+        font-weight: 500;
+        transition: color 0.3s;
+      }
+
+      .nav-links a:hover {
+        color: #2e7d32;
+      }
+
+      .nav-links a.active {
+        color: #2e7d32;
+        border-bottom: 2px solid #2e7d32;
+      }
+
+      .page-header {
+        background: linear-gradient(135deg, #2e7d32 0%, #4caf50 20%, #ffffff 100%);
+        color: #333;
+        padding: 60px 20px;
+        text-align: center;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+      }
+
+
+      .page-header h1 {
+        font-size: 2.5em;
+        margin-bottom: 10px;
+        font-weight: 700;
+        color: #2e7d32;
+      }
+
+
+      .page-header p {
+        font-size: 1.2em;
+        color: #555;
+      }
+
+
+      .content-section {
+        background: white;
+        margin: 30px 0;
+        padding: 40px;
+        border-radius: 12px;
+        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+      }
+
+
+      .content-section h2 {
+        color: #2e7d32;
+        font-size: 2em;
+        margin-bottom: 20px;
+        padding-bottom: 10px;
+        border-bottom: 3px solid #2e7d32;
+      }
+
+
+      .content-section h3 {
+        color: #2e7d32;
+        font-size: 1.5em;
+        margin-top: 30px;
+        margin-bottom: 15px;
+      }
+
+
+      .content-section p {
+        font-size: 1.1em;
+        margin-bottom: 15px;
+        color: #555;
+      }
+
+
+      .highlight-box {
+        background: linear-gradient(135deg, #e8f5e9 0%, #c8e6c9 100%);
+        padding: 25px;
+        border-radius: 8px;
+        border-left: 5px solid #2e7d32;
+        margin: 20px 0;
+      }
+
+
+      .mission-list {
+        list-style: none;
+        padding: 0;
+      }
+
+
+      .mission-list li {
+        padding: 15px;
+        margin: 10px 0;
+        background-color: #f9f9f9;
+        border-radius: 8px;
+        border-left: 4px solid #2e7d32;
+        font-size: 1.1em;
+        transition: transform 0.2s ease, box-shadow 0.2s ease;
+      }
+
+
+      .mission-list li:hover {
+        transform: translateX(5px);
+        box-shadow: 0 2px 8px rgba(46, 125, 50, 0.2);
+      }
+
+
+      .mission-list li::before {
+        content: "✓ ";
+        color: #2e7d32;
+        font-weight: bold;
+        font-size: 1.2em;
+        margin-right: 10px;
+      }
+
+
+      .values-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+        gap: 20px;
+        margin-top: 30px;
+      }
+
+
+      .value-card {
+        background: white;
+        padding: 25px;
+        border-radius: 10px;
+        box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
+        border-top: 4px solid #2e7d32;
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+      }
+
+
+      .value-card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 5px 20px rgba(46, 125, 50, 0.3);
+      }
+
+
+      .value-card h4 {
+        color: #2e7d32;
+        font-size: 1.3em;
+        margin-bottom: 10px;
+      }
+
+
+      .value-card p {
+        color: #666;
+        font-size: 1em;
+        text-align: left;
+      }
+
+
+      .back-button {
+        display: inline-block;
+        margin: 30px 0;
+        padding: 12px 30px;
+        background-color: #2e7d32;
+        color: white;
+        text-decoration: none;
+        border-radius: 8px;
+        font-weight: bold;
+        transition: background-color 0.3s ease, transform 0.2s ease;
+      }
+
+
+      .back-button:hover {
+        background-color: #1b5e20;
+        transform: translateY(-2px);
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+      }
+
+
+      footer {
+        background-color: #333;
+        color: white;
+        text-align: center;
+        padding: 30px 20px;
+        margin-top: 50px;
+      }
+
+
+      @media (max-width: 768px) {
+        .page-header h1 {
+          font-size: 2em;
+        }
+
+        .nav-links {
+          display: none;
+        }
+
+
+        .content-section {
+          padding: 25px;
+        }
+
+
+        .content-section h2 {
+          font-size: 1.5em;
+        }
+
+
+        .values-grid {
+          grid-template-columns: 1fr;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <!-- Header -->
+    <header>
+      <nav>
+        <a href="home.html" class="logo">💊 Apotek Asrama</a>
+        <ul class="nav-links">
+          <li><a href="home.html">Beranda</a></li>
+          <li><a href="layanan.html">Layanan</a></li>
+          <li><a href="produk.html">Produk</a></li>
+          <li><a href="aboutus.html" class="active">Tentang Kami</a></li>
+        </ul>
+      </nav>
+    </header>
+
+    <div class="page-header">
+      <h1>Tentang Kami</h1>
+      <p>
+        Mengenal lebih dekat visi, misi, dan nilai-nilai yang kami pegang teguh
+      </p>
+    </div>
+
+
+    <div class="container">
+
+
+      <div class="content-section">
+        <h2>Apa itu Layanan Obat Asrama UNAI?</h2>
+        <p>
+          Sebuah layanan penyediaan obat-obatan yang berkomitmen untuk membantu
+          mahasiswa dan penghuni asrama UNAI mendapatkan akses mudah terhadap
+          obat-obatan yang dibutuhkan. Kami percaya bahwa kesehatan adalah
+          prioritas utama, dan setiap mahasiswa berhak mendapatkan akses cepat
+          dan mudah terhadap obat-obatan berkualitas untuk menjaga kesehatan
+          mereka selama menjalani aktivitas akademik di kampus.
+        </p>
+        <div class="highlight-box">
+          <p style="margin: 0; font-weight: 600; color: #2e7d32">
+            Kami hadir untuk memastikan kesehatan mahasiswa tetap terjaga dengan
+            menyediakan layanan pemesanan obat yang praktis, cepat, dan
+            terpercaya langsung ke asrama UNAI.
+          </p>
+        </div>
+      </div>
+
+
+      <div class="content-section">
+        <h2>Kapan Layanan Obat Asrama UNAI Dibentuk?</h2>
+        <p>
+          Layanan ini dimulai dari kebutuhan nyata mahasiswa asrama UNAI yang
+          seringkali kesulitan mendapatkan obat-obatan saat sakit, terutama di
+          malam hari. Berawal dari inisiatif membantu rekan-rekan mahasiswa yang
+          membutuhkan obat darurat, kami melihat peluang untuk menghadirkan
+          solusi yang lebih sistematis dan profesional.
+        </p>
+        <p>
+          Untuk mewujudkan visi memberikan akses kesehatan yang mudah bagi
+          mahasiswa asrama, Layanan Obat Asrama UNAI resmi dibentuk pada tahun
+          2025. Proses pembentukan ini bermula dari proyek mata kuliah
+          Kewirausahaan Internet, yang kemudian berkembang menjadi sebuah
+          layanan dengan komitmen membantu mahasiswa mendapatkan obat-obatan
+          yang dibutuhkan dengan cepat, mudah, dan terjangkau.
+        </p>
+        <p>
+          Kami memahami bahwa sebagai mahasiswa, waktu dan akses ke apotek
+          terkadang menjadi kendala. Oleh karena itu, kami hadir untuk
+          memudahkan proses pemesanan dan pengiriman obat langsung ke asrama,
+          sehingga mahasiswa dapat fokus pada aktivitas akademik mereka tanpa
+          khawatir tentang akses kesehatan.
+        </p>
+      </div>
+
+
+      <div class="content-section">
+        <h2>Visi Kami</h2>
+        <div class="highlight-box">
+          <p
+            style="
+              margin: 0;
+              font-size: 1.3em;
+              font-weight: 600;
+              color: #2e7d32;
+            "
+          >
+            Menjadi layanan kesehatan terdepan yang memberikan akses mudah dan
+            cepat terhadap obat-obatan berkualitas untuk seluruh mahasiswa
+            asrama UNAI.
+          </p>
+        </div>
+        <p style="margin-top: 20px">
+          Inovasi dalam pelayanan adalah bagian utama garda terdepan usaha kami.
+          Kami terus berupaya mengembangkan sistem dan layanan yang lebih baik
+          untuk memastikan setiap mahasiswa mendapatkan pengalaman terbaik dalam
+          mengakses layanan kesehatan.
+        </p>
+      </div>
+
+
+      <div class="content-section">
+        <h2>Misi Kami</h2>
+        <ul class="mission-list">
+          <li>
+            Menjadikan masalah akses obat menjadi awal langkah kami membuat
+            inovasi pelayanan kesehatan yang lebih baik
+          </li>
+          <li>
+            Memberikan solusi praktis untuk kebutuhan kesehatan mahasiswa dengan
+            layanan yang mudah diakses
+          </li>
+          <li>
+            Memberikan kepuasan kepada pelanggan melalui pelayanan yang cepat,
+            ramah, dan profesional
+          </li>
+          <li>
+            Menyediakan obat-obatan berkualitas dengan harga terjangkau untuk
+            mahasiswa
+          </li>
+          <li>
+            Memastikan ketersediaan obat-obatan esensial yang dibutuhkan
+            mahasiswa asrama
+          </li>
+          <li>
+            Memberikan edukasi kesehatan dasar kepada mahasiswa tentang
+            penggunaan obat yang benar
+          </li>
+        </ul>
+      </div>
+
+
+      <div class="content-section">
+        <h2>Nilai-Nilai Kami</h2>
+        <div class="values-grid">
+          <div class="value-card">
+            <h4>Kepercayaan</h4>
+            <p>
+              Kami mengutamakan kepercayaan pelanggan dengan menyediakan
+              obat-obatan berkualitas dan pelayanan yang transparan.
+            </p>
+          </div>
+          <div class="value-card">
+            <h4>Kepedulian</h4>
+            <p>
+              Kami peduli terhadap kesehatan dan kesejahteraan setiap mahasiswa
+              yang menggunakan layanan kami.
+            </p>
+          </div>
+          <div class="value-card">
+            <h4>Kemudahan</h4>
+            <p>
+              Kami berkomitmen memberikan kemudahan akses obat dengan sistem
+              pemesanan yang sederhana dan cepat.
+            </p>
+          </div>
+          <div class="value-card">
+            <h4>Kualitas</h4>
+            <p>
+              Kami memastikan setiap produk yang kami sediakan memenuhi standar
+              kualitas dan keamanan yang tinggi.
+            </p>
+          </div>
+          <div class="value-card">
+            <h4>Kecepatan</h4>
+            <p>
+              Kami memahami urgensi kebutuhan obat, sehingga kami berkomitmen
+              memberikan pelayanan yang cepat dan tepat waktu.
+            </p>
+          </div>
+          <div class="value-card">
+            <h4>Terjangkau</h4>
+            <p>
+              Kami menyediakan obat-obatan dengan harga yang terjangkau untuk
+              mahasiswa tanpa mengorbankan kualitas.
+            </p>
+          </div>
+        </div>
+      </div>
+
+
+      <div class="content-section">
+        <h2>Komitmen Kami</h2>
+        <p>
+          Sebagai layanan yang melayani komunitas mahasiswa asrama UNAI, kami
+          berkomitmen untuk terus meningkatkan kualitas layanan kami. Kami
+          memahami bahwa kesehatan adalah investasi penting bagi masa depan
+          mahasiswa, dan kami hadir untuk mendukung perjalanan akademik mereka
+          dengan menyediakan akses mudah terhadap kebutuhan kesehatan.
+        </p>
+      </div>
+    </div>
+
+
+    <footer>
+      <p>&copy; 2025 Layanan Obat Asrama UNAI. Semua hak dilindungi.</p>
+      <p style="margin-top: 10px; font-size: 0.9em; opacity: 0.8">
+        Melayani dengan hati untuk kesehatan mahasiswa UNAI
+      </p>
+    </footer>
+  </body>
+</html>
+
+
+

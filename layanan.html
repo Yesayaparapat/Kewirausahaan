@@ -1,0 +1,378 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Layanan - Apotek Asrama</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            overflow-x: hidden;
+        }
+
+        /* Header & Navigation */
+        header {
+            background: #fff;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            padding: 1rem 0;
+        }
+
+        nav {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: #2e7d32;
+            text-decoration: none;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+            list-style: none;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: #333;
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+
+        .nav-links a:hover {
+            color: #2e7d32;
+        }
+
+        .nav-links a.active {
+            color: #2e7d32;
+            border-bottom: 2px solid #2e7d32;
+        }
+
+        /* Container */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        section {
+            padding: 4rem 0;
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 2.5rem;
+            margin-bottom: 3rem;
+            color: #2e7d32;
+        }
+
+        /* Hero Section */
+        .page-hero {
+            background: linear-gradient(135deg, #2e7d32 0%, #4caf50 20%, #ffffff 100%);
+            color: #333;
+            padding: 4rem 2rem;
+            text-align: center;
+        }
+
+        .page-hero h1 {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            color: #2e7d32;
+        }
+
+        .page-hero p {
+            font-size: 1.2rem;
+            color: #555;
+        }
+
+        /* Services Grid */
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .service-card {
+            background: #f8f9fa;
+            padding: 2.5rem;
+            border-radius: 15px;
+            text-align: center;
+            transition: all 0.3s;
+            border: 2px solid transparent;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.05);
+        }
+
+        .service-card:hover {
+            transform: translateY(-5px);
+            border-color: #2e7d32;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+        }
+
+        .service-icon {
+            font-size: 4rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .service-card h3 {
+            color: #2e7d32;
+            margin-bottom: 1rem;
+            font-size: 1.5rem;
+        }
+
+        .service-card p {
+            color: #666;
+            line-height: 1.8;
+            margin-bottom: 1rem;
+        }
+
+        .service-features {
+            list-style: none;
+            text-align: left;
+            margin-top: 1.5rem;
+        }
+
+        .service-features li {
+            padding: 0.5rem 0;
+            color: #555;
+            padding-left: 1.5rem;
+            position: relative;
+        }
+
+        .service-features li:before {
+            content: "✓";
+            position: absolute;
+            left: 0;
+            color: #2e7d32;
+            font-weight: bold;
+        }
+
+        /* Info Section */
+        .info-section {
+            background: #f8f9fa;
+            padding: 4rem 0;
+        }
+
+        .info-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .info-card {
+            background: white;
+            padding: 2rem;
+            border-radius: 10px;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.08);
+            text-align: center;
+        }
+
+        .info-card h3 {
+            color: #2e7d32;
+            margin-bottom: 1rem;
+        }
+
+        .info-card p {
+            color: #666;
+            line-height: 1.8;
+        }
+
+        /* Footer */
+        footer {
+            background: #1b5e20;
+            color: white;
+            text-align: center;
+            padding: 2rem;
+            margin-top: 4rem;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .section-title {
+                font-size: 2rem;
+            }
+
+            .page-hero h1 {
+                font-size: 2rem;
+            }
+
+            .nav-links {
+                display: none;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <nav>
+            <a href="home.html" class="logo">💊 Apotek Asrama</a>
+            <ul class="nav-links">
+                <li><a href="home.html">Beranda</a></li>
+                <li><a href="layanan.html" class="active">Layanan</a></li>
+                <li><a href="produk.html">Produk</a></li>
+                <li><a href="aboutus.html">Tentang Kami</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <!-- Page Hero -->
+    <section class="page-hero">
+        <div class="container">
+            <h1>Layanan Apotek Asrama</h1>
+            <p>Kami menyediakan berbagai layanan kesehatan yang memudahkan penghuni asrama</p>
+        </div>
+    </section>
+
+    <!-- Layanan Utama -->
+    <section class="container">
+        <h2 class="section-title">Layanan Utama Kami</h2>
+        <div class="services-grid">
+            <div class="service-card">
+                <div class="service-icon">💊</div>
+                <h3>Obat Bebas & Resep</h3>
+                <p>
+                    Kami menyediakan berbagai macam obat bebas untuk kebutuhan kesehatan sehari-hari, 
+                    serta melayani pembelian obat dengan resep dokter.
+                </p>
+                <ul class="service-features">
+                    <li>Obat bebas tanpa resep</li>
+                    <li>Obat resep dokter</li>
+                    <li>Produk asli dan terjamin</li>
+                    <li>Stok selalu tersedia</li>
+                </ul>
+            </div>
+
+            <div class="service-card">
+                <div class="service-icon">🚚</div>
+                <h3>Antar ke Kamar Asrama</h3>
+                <p>
+                    Layanan pengantaran langsung ke kamar asrama Anda. Tidak perlu keluar asrama, 
+                    pesanan akan sampai di depan pintu kamar Anda.
+                </p>
+                <ul class="service-features">
+                    <li>Pengantaran cepat &lt; 15 menit</li>
+                    <li>Langsung ke nomor kamar</li>
+                    <li>Gratis ongkos kirim</li>
+                    <li>Layanan 24/7</li>
+                </ul>
+            </div>
+
+            <div class="service-card">
+                <div class="service-icon">✅</div>
+                <h3>Stok Real-Time</h3>
+                <p>
+                    Informasi ketersediaan stok obat terbaru yang dapat Anda cek kapan saja. 
+                    Kami update secara real-time untuk memastikan akurasi informasi.
+                </p>
+                <ul class="service-features">
+                    <li>Update real-time</li>
+                    <li>Informasi stok akurat</li>
+                    <li>Notifikasi ketersediaan</li>
+                    <li>Akses mudah via platform</li>
+                </ul>
+            </div>
+        </div>
+    </section>
+
+    <!-- Informasi Tambahan -->
+    <section class="info-section">
+        <div class="container">
+            <h2 class="section-title">Informasi Layanan</h2>
+            <div class="info-grid">
+                <div class="info-card">
+                    <h3>⚡ Pengantaran Cepat</h3>
+                    <p>
+                        Pesanan Anda akan diantar dalam waktu kurang dari 15 menit ke kamar asrama. 
+                        Prioritas untuk kebutuhan darurat.
+                    </p>
+                </div>
+
+                <div class="info-card">
+                    <h3>🌙 Buka Hingga Malam</h3>
+                    <p>
+                        Kami melayani hingga jam 22:00 WIB setiap hari. 
+                        Siap membantu kebutuhan kesehatan Anda di malam hari.
+                    </p>
+                </div>
+
+                <div class="info-card">
+                    <h3>💰 Harga Terjangkau</h3>
+                    <p>
+                        Harga khusus untuk mahasiswa dan penghuni asrama. 
+                        Kami memahami kebutuhan Anda dengan harga yang ramah kantong.
+                    </p>
+                </div>
+
+                <div class="info-card">
+                    <h3>📱 Pesan via WhatsApp</h3>
+                    <p>
+                        Pesan obat dengan mudah melalui WhatsApp. 
+                        Kirimkan pesan, nomor kamar, dan pesanan Anda.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Cara Pesan -->
+    <section class="container">
+        <h2 class="section-title">Cara Memesan</h2>
+        <div class="services-grid">
+            <div class="service-card">
+                <div class="service-icon">1️⃣</div>
+                <h3>Pilih Produk</h3>
+                <p>Pilih obat atau produk kesehatan yang Anda butuhkan dari halaman produk kami</p>
+            </div>
+
+            <div class="service-card">
+                <div class="service-icon">2️⃣</div>
+                <h3>Isi Detail Pesanan</h3>
+                <p>Masukkan jumlah pesanan, nomor kamar/alamat, dan catatan jika ada</p>
+            </div>
+
+            <div class="service-card">
+                <div class="service-icon">3️⃣</div>
+                <h3>Kirim Pesan</h3>
+                <p>Kirim pesanan melalui WhatsApp atau langsung checkout dari keranjang</p>
+            </div>
+
+            <div class="service-card">
+                <div class="service-icon">4️⃣</div>
+                <h3>Tunggu Pengantaran</h3>
+                <p>Pesanan Anda akan diantar langsung ke kamar dalam waktu kurang dari 15 menit</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <p>&copy; 2024 Apotek Asrama. Melayani dengan Hati untuk Kesehatan Anda.</p>
+        <p style="margin-top: 0.5rem; font-size: 0.9rem;">
+            <a href="home.html" style="color: white; margin: 0 1rem;">Beranda</a>
+            <a href="layanan.html" style="color: white; margin: 0 1rem;">Layanan</a>
+            <a href="produk.html" style="color: white; margin: 0 1rem;">Produk</a>
+        </p>
+    </footer>
+</body>
+</html>
+

@@ -1,0 +1,2073 @@
+<!DOCTYPE html>
+<html lang="id">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>7 Tombol WhatsApp</title>
+    <style>
+      * {
+        box-sizing: border-box;
+      }
+
+      body {
+        margin: 0;
+        padding: 0;
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+        min-height: 100vh;
+        line-height: 1.6;
+      }
+
+      .button-container {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+        gap: 25px;
+        justify-content: center;
+        align-items: stretch;
+        width: 100%;
+        padding: 20px 0;
+        grid-auto-rows: 1fr;
+      }
+
+      .button-item {
+        display: flex;
+        flex-direction: column;
+        gap: 0;
+        transition: all 0.3s ease;
+        height: 100%;
+      }
+
+      .button-item:hover {
+        transform: translateY(-5px);
+      }
+
+      .send-btn {
+        padding: 10px 20px;
+        font-size: 14px;
+        font-weight: bold;
+        color: white;
+        background-color: #1b5e20;
+        border: none;
+        border-radius: 0 0 8px 8px;
+        cursor: pointer;
+        transition: background-color 0.3s ease, opacity 0.3s ease, visibility 0.3s ease, max-height 0.3s ease, margin-top 0.3s ease;
+        margin-top: 0;
+        visibility: hidden;
+        opacity: 0;
+        max-height: 0;
+        overflow: hidden;
+        flex-shrink: 0;
+        align-self: stretch;
+      }
+
+      .send-btn.show {
+        visibility: visible;
+        opacity: 1;
+        max-height: 100px;
+        margin-top: 0;
+      }
+
+      .send-btn:hover {
+        background-color: #0f6b5f;
+      }
+
+      .send-btn:active {
+        transform: scale(0.95);
+      }
+
+      .chat-box {
+        padding: 10px;
+        font-size: 14px;
+        border: 2px solid #ddd;
+        border-radius: 0;
+        border-top: none;
+        background-color: white;
+        resize: vertical;
+        min-height: 60px;
+        font-family: Arial, sans-serif;
+        transition: border-color 0.3s ease, opacity 0.3s ease, max-height 0.3s ease, margin-top 0.3s ease, visibility 0.3s ease;
+        visibility: hidden;
+        opacity: 0;
+        max-height: 0;
+        overflow: hidden;
+        margin-top: 0;
+        flex: 0 1 auto;
+      }
+
+      .chat-box.show {
+        visibility: visible;
+        opacity: 1;
+        max-height: 200px;
+        margin-top: 0;
+      }
+
+      .chat-box:focus {
+        outline: none;
+        border-color: #2e7d32;
+      }
+
+      .chat-box::placeholder {
+        color: #999;
+      }
+
+      .input-table {
+        visibility: hidden;
+        opacity: 0;
+        max-height: 0;
+        overflow: hidden;
+        width: 100%;
+        border-collapse: collapse;
+        margin-top: 0;
+        background-color: white;
+        border-radius: 8px 8px 0 0;
+        box-shadow: none;
+        transition: opacity 0.3s ease, max-height 0.3s ease, margin-top 0.3s ease, visibility 0.3s ease;
+        flex-shrink: 0;
+      }
+
+      .input-table.show {
+        visibility: visible;
+        opacity: 1;
+        max-height: 300px;
+        margin-top: 0;
+      }
+
+      .input-table th {
+        background-color: #2e7d32;
+        color: white;
+        padding: 10px;
+        text-align: left;
+        font-size: 14px;
+        font-weight: bold;
+      }
+
+      .input-table td {
+        padding: 8px;
+        border-bottom: 1px solid #ddd;
+      }
+
+      .input-table input {
+        width: 100%;
+        padding: 8px;
+        font-size: 14px;
+        border: 1px solid #ddd;
+        border-radius: 4px;
+        box-sizing: border-box;
+      }
+
+      .input-table input:focus {
+        outline: none;
+        border-color: #2e7d32;
+      }
+
+      .quantity-selector {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 15px;
+        width: 100%;
+      }
+
+      .quantity-btn {
+        width: 35px;
+        height: 35px;
+        border-radius: 50%;
+        border: 1px solid #ddd;
+        background-color: #f0f0f0;
+        color: #333;
+        font-size: 18px;
+        font-weight: bold;
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        transition: all 0.3s ease;
+      }
+
+      .quantity-btn:hover {
+        background-color: #2e7d32;
+        color: white;
+        border-color: #2e7d32;
+      }
+
+      .quantity-btn:active {
+        transform: scale(0.9);
+      }
+
+      .quantity-display {
+        min-width: 40px;
+        text-align: center;
+        font-size: 16px;
+        font-weight: bold;
+        color: #333;
+      }
+
+      .input-table tr:last-child td {
+        border-bottom: none;
+      }
+
+      .quantity-selector {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 10px;
+      }
+
+      .quantity-btn {
+        width: 32px;
+        height: 32px;
+        border-radius: 50%;
+        border: 1px solid #ddd;
+        background-color: #f0f0f0;
+        color: #333;
+        font-size: 18px;
+        font-weight: bold;
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        transition: background-color 0.3s ease, transform 0.1s ease;
+      }
+
+      .quantity-btn:hover {
+        background-color: #e0e0e0;
+      }
+
+      .quantity-btn:active {
+        transform: scale(0.95);
+      }
+
+      .quantity-value {
+        min-width: 40px;
+        text-align: center;
+        font-size: 16px;
+        font-weight: bold;
+        color: #333;
+        padding: 5px 10px;
+      }
+
+      .btn {
+        padding: 14px 28px;
+        font-size: 16px;
+        font-weight: 600;
+        color: white;
+        background: linear-gradient(135deg, #2e7d32 0%, #4caf50 100%);
+        border: none;
+        border-radius: 12px;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        box-shadow: 0 4px 15px rgba(46, 125, 50, 0.3);
+        letter-spacing: 0.3px;
+        position: relative;
+        overflow: hidden;
+        width: 100%;
+        margin-top: 15px;
+        flex-shrink: 0;
+      }
+
+      .product-display .btn {
+        margin-top: auto;
+      }
+
+      .btn::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: -100%;
+        width: 100%;
+        height: 100%;
+        background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+        transition: left 0.5s;
+      }
+
+      .btn:hover::before {
+        left: 100%;
+      }
+
+      .btn.hidden {
+        opacity: 0;
+        visibility: hidden;
+        max-height: 0;
+        margin: 0;
+        padding: 0;
+        overflow: hidden;
+      }
+
+      .btn:hover {
+        background: linear-gradient(135deg, #1b5e20 0%, #2e7d32 100%);
+        transform: translateY(-2px);
+        box-shadow: 0 6px 20px rgba(46, 125, 50, 0.4);
+      }
+
+      .btn:active {
+        transform: translateY(0);
+        box-shadow: 0 2px 10px rgba(46, 125, 50, 0.3);
+      }
+
+      .btn:disabled {
+        background-color: #ccc;
+        cursor: not-allowed;
+      }
+
+
+      .product-display {
+        display: flex;
+        flex-direction: column;
+        margin-bottom: 0;
+        background: linear-gradient(135deg, #ffffff 0%, #f8f9fa 100%);
+        border-radius: 16px;
+        padding: 20px;
+        box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+        flex-shrink: 0;
+        flex: 1;
+        transition: all 0.3s ease;
+        border: 1px solid rgba(255, 255, 255, 0.8);
+        position: relative;
+        overflow: hidden;
+        min-height: 450px;
+        justify-content: space-between;
+        height: 100%;
+      }
+
+      .product-display::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        height: 4px;
+        background: linear-gradient(90deg, #2e7d32 0%, #4caf50 100%);
+      }
+
+      .product-display:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 8px 30px rgba(46, 125, 50, 0.15);
+      }
+
+      .product-image {
+        width: 100%;
+        max-width: 100%;
+        height: 200px;
+        border-radius: 12px;
+        margin: 0 auto 15px auto;
+        object-fit: contain;
+        background-color: #f8f9fa;
+        border: none;
+        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        transition: transform 0.3s ease;
+        padding: 10px;
+        display: block;
+      }
+
+      .product-display:hover .product-image {
+        transform: scale(1.05);
+      }
+
+      .product-title {
+        font-size: 16px;
+        font-weight: 700;
+        color: #2e7d32;
+        margin: 0 0 8px 0;
+        letter-spacing: -0.5px;
+        text-align: center;
+        line-height: 1.4;
+        min-height: 44px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        word-wrap: break-word;
+        overflow-wrap: break-word;
+      }
+
+      .product-category {
+        font-size: 11px;
+        font-weight: 600;
+        color: #666;
+        margin: 0 0 10px 0;
+        text-align: center;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+        min-height: 16px;
+      }
+
+      .product-price {
+        font-size: 22px;
+        font-weight: 700;
+        color: #2e7d32;
+        margin: auto 0 0 0;
+        letter-spacing: -0.5px;
+        text-align: center;
+        min-height: 30px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+
+      .product-description {
+        font-size: 14px;
+        color: #333;
+        line-height: 1.5;
+        margin-top: 10px;
+      }
+
+      .product-description-short {
+        font-size: 14px;
+        color: #333;
+        line-height: 1.5;
+        margin-top: 10px;
+      }
+
+      .product-description-full {
+        font-size: 14px;
+        color: #333;
+        line-height: 1.5;
+        margin-top: 10px;
+        visibility: hidden;
+        opacity: 0;
+        max-height: 0;
+        overflow: hidden;
+        transition: opacity 0.3s ease, max-height 0.3s ease, margin-top 0.3s ease;
+      }
+
+      .product-description-full.show {
+        visibility: visible;
+        opacity: 1;
+        max-height: 200px;
+        margin-top: 10px;
+      }
+
+      .show-more-btn {
+        margin-top: 8px;
+        padding: 6px 12px;
+        font-size: 12px;
+        background-color: transparent;
+        color: #2e7d32;
+        border: 1px solid #2e7d32;
+        border-radius: 4px;
+        cursor: pointer;
+        transition: all 0.3s ease;
+      }
+
+      .show-more-btn:hover {
+        background-color: #2e7d32;
+        color: white;
+      }
+
+      /* Modal Popup Styles */
+      .modal-overlay {
+        display: none;
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(0, 0, 0, 0.5);
+        z-index: 1000;
+        justify-content: center;
+        align-items: center;
+        opacity: 0;
+        transition: opacity 0.3s ease;
+      }
+
+      .modal-overlay.show {
+        display: flex;
+        opacity: 1;
+      }
+
+      .modal-content {
+        background-color: white;
+        border-radius: 12px;
+        padding: 0;
+        max-width: 500px;
+        width: 90%;
+        max-height: 90vh;
+        overflow-y: auto;
+        box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+        transform: scale(0.9);
+        transition: transform 0.3s ease;
+        position: relative;
+        display: flex;
+        flex-direction: column;
+      }
+
+      .modal-overlay.show .modal-content {
+        transform: scale(1);
+      }
+
+      .modal-header {
+        background-color: #2e7d32;
+        color: white;
+        padding: 15px 20px;
+        border-radius: 12px 12px 0 0;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+      }
+
+      .modal-header h3 {
+        margin: 0;
+        font-size: 18px;
+      }
+
+      .modal-close {
+        background: none;
+        border: none;
+        color: white;
+        font-size: 24px;
+        cursor: pointer;
+        padding: 0;
+        width: 30px;
+        height: 30px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border-radius: 50%;
+        transition: background-color 0.3s ease;
+      }
+
+      .modal-close:hover {
+        background-color: rgba(255, 255, 255, 0.2);
+      }
+
+      .modal-body {
+        padding: 20px;
+        overflow-y: auto;
+        flex: 1;
+        display: flex;
+        flex-direction: column;
+      }
+
+      .modal-body .input-table {
+        visibility: visible;
+        opacity: 1;
+        max-height: none;
+        margin-top: 0;
+        border-radius: 10px;
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+        overflow: hidden;
+        border: 1px solid #e0e0e0;
+      }
+
+      .modal-body .input-table th {
+          background: linear-gradient(135deg, #2e7d32 0%, #4caf50 100%);
+        padding: 12px 15px;
+        font-size: 15px;
+        font-weight: 600;
+        letter-spacing: 0.3px;
+      }
+
+      .modal-body .input-table td {
+        padding: 15px;
+        background-color: #ffffff;
+      }
+
+      .modal-body .input-table input {
+        padding: 12px 15px;
+        font-size: 15px;
+        border: 2px solid #e0e0e0;
+        border-radius: 8px;
+        transition: all 0.3s ease;
+      }
+
+      .modal-body .input-table input:focus {
+        border-color: #2e7d32;
+        box-shadow: 0 0 0 3px rgba(46, 125, 50, 0.1);
+      }
+
+      .modal-body .chat-box {
+        visibility: visible;
+        opacity: 1;
+        max-height: none;
+        margin-top: 15px;
+        border-radius: 10px;
+        display: block;
+        padding: 12px 15px;
+        font-size: 15px;
+        border: 2px solid #e0e0e0;
+        transition: all 0.3s ease;
+        resize: vertical;
+        min-height: 80px;
+      }
+
+      .modal-body .chat-box:focus {
+        border-color: #2e7d32;
+        box-shadow: 0 0 0 3px rgba(46, 125, 50, 0.1);
+        outline: none;
+      }
+
+      .modal-body .send-btn {
+        visibility: visible;
+        opacity: 1;
+        max-height: none;
+        margin-top: 15px;
+        border-radius: 10px;
+        display: block;
+        padding: 14px 20px;
+        font-size: 16px;
+        font-weight: 600;
+        transition: all 0.3s ease;
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+      }
+
+      .modal-body .send-btn:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+      }
+
+      .modal-body .send-btn:active {
+        transform: translateY(0);
+      }
+
+      .modal-body .quantity-selector {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 15px;
+        padding: 10px 0;
+      }
+
+      .modal-body .quantity-btn {
+        width: 40px;
+        height: 40px;
+        border-radius: 50%;
+        border: 2px solid #2e7d32;
+        background-color: #ffffff;
+        color: #2e7d32;
+        font-size: 20px;
+        font-weight: bold;
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        transition: all 0.3s ease;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+      }
+
+      .modal-body .quantity-btn:hover {
+        background-color: #2e7d32;
+        color: #ffffff;
+        transform: scale(1.1);
+        box-shadow: 0 4px 8px rgba(46, 125, 50, 0.3);
+      }
+
+      .modal-body .quantity-btn:active {
+        transform: scale(0.95);
+      }
+
+      .modal-body .quantity-display {
+        min-width: 50px;
+        text-align: center;
+        font-size: 20px;
+        font-weight: bold;
+        color: #333;
+        padding: 8px 15px;
+        background-color: #f9f9f9;
+        border-radius: 8px;
+        border: 2px solid #e0e0e0;
+      }
+
+      .total-price-display {
+        margin-top: 15px;
+        padding: 12px;
+        background: linear-gradient(135deg, #e8f5e9 0%, #c8e6c9 100%);
+        border-radius: 8px;
+        border-left: 4px solid #2e7d32;
+        text-align: center;
+      }
+
+      .total-price-label {
+        font-size: 14px;
+        color: #555;
+        margin-bottom: 5px;
+      }
+
+      .total-price-value {
+        font-size: 24px;
+        font-weight: bold;
+        color: #2e7d32;
+      }
+
+      .modal-body .send-btn[style*="background-color: #ffc107"] {
+        background: linear-gradient(135deg, #ffc107 0%, #ff9800 100%) !important;
+        color: #333 !important;
+        font-weight: 600;
+      }
+
+      .modal-body .send-btn[style*="background-color: #ffc107"]:hover {
+        background: linear-gradient(135deg, #ffb300 0%, #f57c00 100%) !important;
+      }
+
+      .modal-body .send-btn:not([style*="background-color: #ffc107"]) {
+        background: linear-gradient(135deg, #2e7d32 0%, #4caf50 100%) !important;
+        color: #ffffff !important;
+      }
+
+      .modal-body .send-btn:not([style*="background-color: #ffc107"]):hover {
+        background: linear-gradient(135deg, #1b5e20 0%, #2e7d32 100%) !important;
+      }
+
+      /* Cart Styles */
+      .cart-header {
+        position: fixed;
+        top: 25px;
+        right: 25px;
+        z-index: 1001;
+      }
+
+      .cart-icon {
+        position: relative;
+        background: linear-gradient(135deg, #2e7d32 0%, #4caf50 100%);
+        color: white;
+        width: 60px;
+        height: 60px;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 26px;
+        cursor: pointer;
+        box-shadow: 0 4px 20px rgba(46, 125, 50, 0.4);
+        transition: all 0.3s ease;
+        border: 3px solid rgba(255, 255, 255, 0.3);
+      }
+
+      .cart-icon:hover {
+        transform: scale(1.15) rotate(5deg);
+        box-shadow: 0 6px 25px rgba(46, 125, 50, 0.5);
+      }
+
+      .cart-badge {
+        position: absolute;
+        top: -8px;
+        right: -8px;
+        background: linear-gradient(135deg, #dc3545 0%, #c82333 100%);
+        color: white;
+        border-radius: 50%;
+        width: 26px;
+        height: 26px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 12px;
+        font-weight: 700;
+        box-shadow: 0 2px 8px rgba(220, 53, 69, 0.4);
+        border: 2px solid white;
+        animation: pulse 2s infinite;
+      }
+
+      @keyframes pulse {
+        0%, 100% {
+          transform: scale(1);
+        }
+        50% {
+          transform: scale(1.1);
+        }
+      }
+
+      .add-to-cart-btn {
+        margin-top: 10px;
+        padding: 8px 16px;
+        font-size: 14px;
+        background-color: #2e7d32;
+        color: white;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        width: 100%;
+      }
+
+      .add-to-cart-btn:hover {
+        background-color: #1b5e20;
+      }
+
+      .cart-item {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 15px;
+        border-bottom: 1px solid #ddd;
+      }
+
+      .cart-item-info {
+        flex: 1;
+      }
+
+      .cart-item-name {
+        font-weight: bold;
+        margin-bottom: 5px;
+      }
+
+      .cart-item-price {
+        color: #2e7d32;
+        font-size: 14px;
+      }
+
+      .cart-item-actions {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+      }
+
+      .cart-item-quantity {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+      }
+
+      .cart-remove-btn {
+        background-color: #dc3545;
+        color: white;
+        border: none;
+        border-radius: 4px;
+        padding: 5px 10px;
+        cursor: pointer;
+        font-size: 12px;
+      }
+
+      .cart-remove-btn:hover {
+        background-color: #c82333;
+      }
+
+      .cart-total {
+        padding: 15px 20px;
+        border-top: 2px solid #2e7d32;
+        background-color: #f9f9f9;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        font-weight: bold;
+        font-size: 18px;
+      }
+
+      .cart-checkout-btn {
+        width: 100%;
+        padding: 12px;
+        background-color: #2e7d32;
+        color: white;
+        border: none;
+        border-radius: 0 0 12px 12px;
+        font-size: 16px;
+        font-weight: bold;
+        cursor: pointer;
+        transition: background-color 0.3s ease;
+      }
+
+      .cart-checkout-btn:hover {
+        background-color: #1b5e20;
+      }
+
+      .cart-empty {
+        padding: 40px;
+        text-align: center;
+        color: #999;
+      }
+
+      /* Navbar Styles */
+      header {
+        background: #fff;
+        box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        position: sticky;
+        top: 0;
+        z-index: 1000;
+        padding: 1rem 0;
+      }
+
+      nav {
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 0 2rem;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+      }
+
+      .logo {
+        font-size: 1.5rem;
+        font-weight: bold;
+        color: #2e7d32;
+        text-decoration: none;
+      }
+
+      .nav-links {
+        display: flex;
+        gap: 2rem;
+        list-style: none;
+      }
+
+      .nav-links a {
+        text-decoration: none;
+        color: #333;
+        font-weight: 500;
+        transition: color 0.3s;
+      }
+
+      .nav-links a:hover {
+        color: #2e7d32;
+      }
+
+      .nav-links a.active {
+        color: #2e7d32;
+        border-bottom: 2px solid #2e7d32;
+      }
+
+      /* Section Styles */
+      .section {
+        display: none;
+        padding: 40px 20px;
+        max-width: 1200px;
+        margin: 0 auto;
+        animation: fadeIn 0.5s ease;
+      }
+
+      @keyframes fadeIn {
+        from {
+          opacity: 0;
+          transform: translateY(20px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+
+      .section.active {
+        display: block;
+      }
+
+      #section-home {
+        background-color: transparent;
+      }
+
+      #section-pesan,
+      #section-tentang {
+        background: linear-gradient(135deg, #f5f7fa 0%, #e8ecf1 100%);
+        min-height: calc(100vh - 100px);
+      }
+
+      .section-title {
+        font-size: 36px;
+        font-weight: 700;
+        background: linear-gradient(135deg, #2e7d32 0%, #4caf50 100%);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+        margin-bottom: 40px;
+        text-align: center;
+        letter-spacing: -1px;
+        position: relative;
+      }
+
+      .section-title::after {
+        content: '';
+        position: absolute;
+        bottom: -10px;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 80px;
+        height: 4px;
+        background: linear-gradient(90deg, #2e7d32 0%, #4caf50 100%);
+        border-radius: 2px;
+      }
+
+      .about-section {
+        background: linear-gradient(135deg, #ffffff 0%, #f8f9fa 100%);
+        padding: 40px;
+        border-radius: 20px;
+        box-shadow: 0 8px 30px rgba(0, 0, 0, 0.08);
+        margin-bottom: 30px;
+        border: 1px solid rgba(255, 255, 255, 0.8);
+        transition: all 0.3s ease;
+      }
+
+      .about-section:hover {
+        box-shadow: 0 12px 40px rgba(0, 0, 0, 0.12);
+        transform: translateY(-2px);
+      }
+
+      .about-section h3 {
+        color: #2e7d32;
+        font-size: 24px;
+        font-weight: 700;
+        margin-bottom: 20px;
+        letter-spacing: -0.5px;
+        position: relative;
+        padding-bottom: 10px;
+      }
+
+      .about-section h3::after {
+        content: '';
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        width: 60px;
+        height: 3px;
+        background: linear-gradient(90deg, #2e7d32 0%, #4caf50 100%);
+        border-radius: 2px;
+      }
+
+      .about-section p {
+        color: #555;
+        line-height: 1.9;
+        margin-bottom: 20px;
+        font-size: 16px;
+      }
+
+      .about-section ul {
+        color: #555;
+        line-height: 2;
+        margin-left: 25px;
+        font-size: 16px;
+      }
+
+      .about-section li {
+        margin-bottom: 12px;
+        position: relative;
+        padding-left: 10px;
+      }
+
+      .about-section li::marker {
+        color: #2e7d32;
+      }
+
+      .whatsapp-link {
+        display: inline-block;
+        padding: 15px 30px;
+        background: linear-gradient(135deg, #2e7d32 0%, #4caf50 100%);
+        color: white;
+        text-decoration: none;
+        border-radius: 10px;
+        font-size: 18px;
+        font-weight: bold;
+        box-shadow: 0 4px 12px rgba(37, 211, 102, 0.3);
+        transition: all 0.3s ease;
+      }
+
+      .whatsapp-link:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 6px 16px rgba(46, 125, 50, 0.4);
+        background: linear-gradient(135deg, #1b5e20 0%, #2e7d32 100%);
+      }
+    </style>
+  </head>
+  <body>
+    <!-- Header -->
+    <header>
+      <nav>
+        <a href="home.html" class="logo">💊 Apotek Asrama</a>
+        <ul class="nav-links">
+          <li><a href="home.html">Beranda</a></li>
+          <li><a href="layanan.html">Layanan</a></li>
+          <li><a href="produk.html" class="active">Produk</a></li>
+          <li><a href="aboutus.html">Tentang Kami</a></li>
+        </ul>
+      </nav>
+    </header>
+
+    <!-- Cart Icon -->
+    <div class="cart-header">
+      <div class="cart-icon" onclick="openCartModal()">
+        🛒
+        <span class="cart-badge" id="cartBadge" style="display: none;">0</span>
+      </div>
+    </div>
+
+    <!-- Section Home -->
+    <section id="section-home" class="section" style="display: none;">
+      <h2 class="section-title">Produk Apotek Asrama</h2>
+      <div class="about-section">
+        <h3>Selamat Datang di Apotek Asrama</h3>
+        <p>
+          Kami menyediakan berbagai macam obat-obatan berkualitas tinggi untuk memenuhi kebutuhan kesehatan penghuni asrama. 
+          Semua produk kami telah teruji dan aman untuk digunakan. Pesan sekarang dan dapatkan pengantaran langsung ke kamar Anda!
+        </p>
+        
+        <h3>Kategori Produk Kami</h3>
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 20px; margin-top: 20px;">
+          <div style="background: linear-gradient(135deg, #f9f9f9 0%, #ffffff 100%); padding: 20px; border-radius: 12px; border: 1px solid #e0e0e0; box-shadow: 0 2px 8px rgba(0,0,0,0.05);">
+            <div style="font-size: 40px; text-align: center; margin-bottom: 10px;">💊</div>
+            <h4 style="color: #2e7d32; font-size: 18px; margin-bottom: 10px; text-align: center;">Obat Sakit Kepala</h4>
+            <p style="color: #555; font-size: 14px; text-align: center;">Paramex - Obat sakit kepala dengan kandungan Paracetamol, Propyphenazone, Caffeine, dan Dexchlorpheniramine Maleate.</p>
+          </div>
+          
+          <div style="background: linear-gradient(135deg, #f9f9f9 0%, #ffffff 100%); padding: 20px; border-radius: 12px; border: 1px solid #e0e0e0; box-shadow: 0 2px 8px rgba(0,0,0,0.05);">
+            <div style="font-size: 40px; text-align: center; margin-bottom: 10px;">🤧</div>
+            <h4 style="color: #2e7d32; font-size: 18px; margin-bottom: 10px; text-align: center;">Obat Batuk</h4>
+            <p style="color: #555; font-size: 14px; text-align: center;">Obat batuk yang efektif untuk meredakan batuk kering dan batuk berdahak dengan bahan aktif yang aman.</p>
+          </div>
+          
+          <div style="background: linear-gradient(135deg, #f9f9f9 0%, #ffffff 100%); padding: 20px; border-radius: 12px; border: 1px solid #e0e0e0; box-shadow: 0 2px 8px rgba(0,0,0,0.05);">
+            <div style="font-size: 40px; text-align: center; margin-bottom: 10px;">😷</div>
+            <h4 style="color: #2e7d32; font-size: 18px; margin-bottom: 10px; text-align: center;">Obat Pilek</h4>
+            <p style="color: #555; font-size: 14px; text-align: center;">Obat pilek untuk meredakan hidung tersumbat dan gejala flu, membantu melegakan pernapasan dengan cepat.</p>
+          </div>
+          
+          <div style="background: linear-gradient(135deg, #f9f9f9 0%, #ffffff 100%); padding: 20px; border-radius: 12px; border: 1px solid #e0e0e0; box-shadow: 0 2px 8px rgba(0,0,0,0.05);">
+            <div style="font-size: 40px; text-align: center; margin-bottom: 10px;">🌡️</div>
+            <h4 style="color: #2e7d32; font-size: 18px; margin-bottom: 10px; text-align: center;">Obat Demam</h4>
+            <p style="color: #555; font-size: 14px; text-align: center;">Obat demam yang efektif untuk menurunkan suhu tubuh yang tinggi, aman untuk anak-anak dan dewasa.</p>
+          </div>
+          
+          <div style="background: linear-gradient(135deg, #f9f9f9 0%, #ffffff 100%); padding: 20px; border-radius: 12px; border: 1px solid #e0e0e0; box-shadow: 0 2px 8px rgba(0,0,0,0.05);">
+            <div style="font-size: 40px; text-align: center; margin-bottom: 10px;">🤢</div>
+            <h4 style="color: #2e7d32; font-size: 18px; margin-bottom: 10px; text-align: center;">Obat Maag</h4>
+            <p style="color: #555; font-size: 14px; text-align: center;">Obat maag untuk meredakan nyeri lambung dan asam lambung, mengurangi gejala maag dengan cepat dan aman.</p>
+          </div>
+          
+          <div style="background: linear-gradient(135deg, #f9f9f9 0%, #ffffff 100%); padding: 20px; border-radius: 12px; border: 1px solid #e0e0e0; box-shadow: 0 2px 8px rgba(0,0,0,0.05);">
+            <div style="font-size: 40px; text-align: center; margin-bottom: 10px;">🚽</div>
+            <h4 style="color: #2e7d32; font-size: 18px; margin-bottom: 10px; text-align: center;">Obat Diare</h4>
+            <p style="color: #555; font-size: 14px; text-align: center;">Obat diare untuk menghentikan diare dan menormalkan pencernaan, mengandung elektrolit untuk rehidrasi tubuh.</p>
+          </div>
+          
+          <div style="background: linear-gradient(135deg, #f9f9f9 0%, #ffffff 100%); padding: 20px; border-radius: 12px; border: 1px solid #e0e0e0; box-shadow: 0 2px 8px rgba(0,0,0,0.05);">
+            <div style="font-size: 40px; text-align: center; margin-bottom: 10px;">💊</div>
+            <h4 style="color: #2e7d32; font-size: 18px; margin-bottom: 10px; text-align: center;">Obat Vitamin</h4>
+            <p style="color: #555; font-size: 14px; text-align: center;">Suplemen vitamin lengkap untuk meningkatkan daya tahan tubuh, mengandung berbagai vitamin esensial yang dibutuhkan tubuh.</p>
+          </div>
+        </div>
+
+        <h3 style="margin-top: 30px;">Keunggulan Produk Kami</h3>
+        <ul>
+          <li>Semua produk telah teruji dan aman untuk digunakan</li>
+          <li>Harga terjangkau dan kompetitif</li>
+          <li>Kualitas terjamin dari produsen terpercaya</li>
+          <li>Kemasan asli dan tersegel</li>
+          <li>Stok selalu tersedia</li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- Section Pesan -->
+    <section id="section-pesan" class="section active" style="display: block;">
+      <h2 class="section-title">Pemesanan Produk</h2>
+      
+      <!-- Search and Filter Section -->
+      <div style="max-width: 1200px; margin: 0 auto 30px auto; padding: 0 20px;">
+        <div style="display: flex; gap: 15px; flex-wrap: wrap; align-items: center; justify-content: center;">
+          <!-- Search Bar -->
+          <div style="flex: 1; min-width: 250px; max-width: 400px;">
+            <input 
+              type="text" 
+              id="searchInput" 
+              placeholder="🔍 Cari nama obat..." 
+              style="width: 100%; padding: 12px 20px; font-size: 16px; border: 2px solid #e0e0e0; border-radius: 10px; transition: all 0.3s ease; box-sizing: border-box;"
+              onkeyup="filterProducts()"
+              onfocus="this.style.borderColor='#2e7d32'; this.style.boxShadow='0 0 0 3px rgba(46, 125, 50, 0.1)'"
+              onblur="this.style.borderColor='#e0e0e0'; this.style.boxShadow='none'"
+            />
+          </div>
+          
+          <!-- Category Dropdown -->
+          <div style="min-width: 200px;">
+            <select 
+              id="categoryFilter" 
+              onchange="filterProducts()"
+              style="width: 100%; padding: 12px 20px; font-size: 16px; border: 2px solid #e0e0e0; border-radius: 10px; background: white; cursor: pointer; transition: all 0.3s ease; box-sizing: border-box;"
+              onfocus="this.style.borderColor='#2e7d32'; this.style.boxShadow='0 0 0 3px rgba(46, 125, 50, 0.1)'"
+              onblur="this.style.borderColor='#e0e0e0'; this.style.boxShadow='none'"
+            >
+              <option value="">Semua Kategori</option>
+              <option value="SAKIT KEPALA">Sakit Kepala</option>
+              <option value="BATUK">Batuk</option>
+              <option value="BALSEM">Balsem</option>
+              <option value="DEMAM">Demam</option>
+              <option value="ASAM LAMBUNG">Asam Lambung</option>
+              <option value="DIARE">Diare</option>
+              <option value="VITAMIN">Vitamin</option>
+            </select>
+          </div>
+          
+          <!-- Price Sort Dropdown -->
+          <div style="min-width: 200px;">
+            <select 
+              id="priceSort" 
+              onchange="filterProducts()"
+              style="width: 100%; padding: 12px 20px; font-size: 16px; border: 2px solid #e0e0e0; border-radius: 10px; background: white; cursor: pointer; transition: all 0.3s ease; box-sizing: border-box;"
+              onfocus="this.style.borderColor='#2e7d32'; this.style.boxShadow='0 0 0 3px rgba(46, 125, 50, 0.1)'"
+              onblur="this.style.borderColor='#e0e0e0'; this.style.boxShadow='none'"
+            >
+              <option value="">Urutkan Harga</option>
+              <option value="asc">Termurah ke Termahal</option>
+              <option value="desc">Termahal ke Termurah</option>
+            </select>
+          </div>
+        </div>
+      </div>
+      
+      <div class="button-container" id="productContainer">
+        <!-- Products will be rendered here by JavaScript -->
+      </div>
+    </section>
+
+
+    <!-- Modal Popup -->
+    <div class="modal-overlay" id="modalOverlay" onclick="closeModalOnOverlay(event)">
+      <div class="modal-content" onclick="event.stopPropagation()">
+        <div class="modal-header">
+          <h3 id="modalTitle">Form Pemesanan</h3>
+          <button class="modal-close" onclick="closeModal()">&times;</button>
+        </div>
+        <div class="modal-body">
+          <!-- Detail Produk -->
+          <div id="modalProductInfo" style="margin-bottom: 20px; padding: 20px; background: linear-gradient(135deg, #f9f9f9 0%, #ffffff 100%); border-radius: 12px; border: 1px solid #e0e0e0; box-shadow: 0 2px 8px rgba(0,0,0,0.05); flex-shrink: 0;">
+            <div style="display: flex; align-items: center; gap: 20px; margin-bottom: 15px;">
+              <div id="modalProductImage" style="flex-shrink: 0;">
+                <img id="modalProductImg" src="" alt="" style="width: 120px; height: 120px; border-radius: 10px; border: 2px solid #e0e0e0; object-fit: contain; background-color: #f8f9fa; padding: 5px; box-shadow: 0 2px 4px rgba(0,0,0,0.1);" />
+              </div>
+              <div style="flex: 1;">
+                <div id="modalProductName" style="font-size: 22px; font-weight: bold; color: #2e7d32; margin-bottom: 8px;"></div>
+                <div id="modalProductPrice" style="font-size: 20px; font-weight: bold; color: #2e7d32; margin-bottom: 12px;"></div>
+              </div>
+            </div>
+            <div id="modalProductDescription" style="font-size: 14px; color: #555; line-height: 1.6; text-align: justify; padding-top: 15px; border-top: 1px solid #e0e0e0;"></div>
+          </div>
+          
+          <table class="input-table" id="modalTable">
+            <tbody>
+              <tr>
+                <th>Jumlah</th>
+              </tr>
+              <tr>
+                <td>
+                  <div class="quantity-selector">
+                    <button class="quantity-btn" onclick="decreaseQuantity('modal')">-</button>
+                    <span class="quantity-display" id="modalQuantity">1</span>
+                    <button class="quantity-btn" onclick="increaseQuantity('modal')">+</button>
+                  </div>
+                  <input type="hidden" id="modalJumlah" value="1" />
+                  <div class="total-price-display">
+                    <div class="total-price-label">Total Harga</div>
+                    <div class="total-price-value" id="modalTotalPrice">Rp 0</div>
+                  </div>
+                </td>
+              </tr>
+              <tr>
+                <th>Nomor Kamar / Alamat</th>
+              </tr>
+              <tr>
+                <td>
+                  <input
+                    type="text"
+                    id="modalKamar"
+                    placeholder="Masukkan nomor kamar/alamat"
+                  />
+                </td>
+              </tr>
+            </tbody>
+          </table>
+          <textarea
+            class="chat-box"
+            id="modalMessage"
+            placeholder="Ketik pesan..."
+            style="display: block; margin-top: 15px;"
+          ></textarea>
+          <div style="display: flex; gap: 10px; margin-top: 15px;">
+            <button class="send-btn" onclick="addToCartFromModal()" style="flex: 1; background-color: #ffc107; color: #333;">🛒 Masukkan ke Keranjang</button>
+            <button class="send-btn" onclick="sendToWhatsAppFromModal()" style="flex: 1;">Kirim ke WhatsApp</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Cart Modal -->
+    <div class="modal-overlay" id="cartModalOverlay" onclick="closeCartModalOnOverlay(event)">
+      <div class="modal-content" onclick="event.stopPropagation()" style="max-width: 600px;">
+        <div class="modal-header">
+          <h3>Keranjang Belanja</h3>
+          <button class="modal-close" onclick="closeCartModal()">&times;</button>
+        </div>
+        <div class="modal-body" id="cartBody" style="max-height: 400px; overflow-y: auto;">
+          <div class="cart-empty" id="cartEmpty">
+            Keranjang masih kosong
+          </div>
+        </div>
+        <div class="cart-total" id="cartTotal" style="display: none;">
+          <span>Total:</span>
+          <span id="cartTotalPrice">Rp 0</span>
+        </div>
+        <button class="cart-checkout-btn" id="cartCheckoutBtn" onclick="checkoutCart()" style="display: none;">
+          Checkout ke WhatsApp
+        </button>
+      </div>
+    </div>
+
+    <script>
+      const PHONE_NUMBER = "6281234567890"; // Nomor WhatsApp: 081234567890 (sesuaikan dengan nomor Apotek Asrama)
+
+      // Navbar Navigation Function - removed, using separate pages now
+
+      function toggleInput(buttonNumber) {
+        const textBox = document.getElementById(`message${buttonNumber}`);
+        const inputTable = document.getElementById(`table${buttonNumber}`);
+        const sendBtn = document.getElementById(`sendBtn${buttonNumber}`);
+        const orderBtn = document.querySelector(`button[onclick="toggleInput(${buttonNumber})"]`);
+
+        // Toggle visibility
+        const isVisible = textBox.classList.contains("show");
+        
+        if (isVisible) {
+          textBox.classList.remove("show");
+          inputTable.classList.remove("show");
+          sendBtn.classList.remove("show");
+          // Tampilkan kembali tombol pesan jika ada
+          if (orderBtn && buttonNumber === 1) {
+            orderBtn.classList.remove("hidden");
+          }
+          // Kosongkan input saat disembunyikan
+          textBox.value = "";
+          const inputs = inputTable.querySelectorAll("input[type='text']");
+          inputs.forEach((input) => (input.value = ""));
+          // Reset quantity ke 1
+          resetQuantity(buttonNumber);
+        } else {
+          textBox.classList.add("show");
+          inputTable.classList.add("show");
+          sendBtn.classList.add("show");
+          // Sembunyikan tombol pesan jika tombol 1
+          if (orderBtn && buttonNumber === 1) {
+            orderBtn.classList.add("hidden");
+          }
+        }
+      }
+
+      function toggleDescription(buttonNumber) {
+        const descriptionFull = document.getElementById(`productDescriptionFull${buttonNumber}`);
+        const showMoreBtn = document.getElementById(`showMoreBtn${buttonNumber}`);
+        
+        if (descriptionFull && showMoreBtn) {
+          const isVisible = descriptionFull.classList.contains("show");
+          
+          if (isVisible) {
+            descriptionFull.classList.remove("show");
+            showMoreBtn.textContent = "Lihat Selengkapnya";
+          } else {
+            descriptionFull.classList.add("show");
+            showMoreBtn.textContent = "Sembunyikan";
+          }
+        }
+      }
+
+      // Data produk untuk setiap tombol - MUDAH DIUBAH!
+      const products = {
+        1: {
+          name: "Paramex 4 Tablet",
+          category: "SAKIT KEPALA",
+          image: "Paramex 4 Tablet.jpg",
+          price: "Rp 3.000",
+          descriptionShort: "Obat untuk meringankan sakit kepala dan sakit gigi dengan kandungan Paracetamol, Propyphenazone, Caffeine, dan Dexchlorpheniramine maleate.",
+          descriptionFull: "PARAMEX merupakan obat dengan kandungan Paracetamol, Propyphenazone, Caffeine, Dexchlorpheniramine maleate. Obat ini dapat digunakan untuk meringankan sakit kepala dan sakit gigi.\n\nDosis: Dewasa dan anak-anak diatas 12 tahun : 2-3 kali sehari 1 tablet.\n\nAturan Pakai: Sesudah makan."
+        },
+        2: {
+          name: "OBH Combi Plus Batuk Flu Menthol 100 ml",
+          category: "BATUK",
+          image: "OBH Combi Plus Batuk Flu Menthol 100 ml.jpeg",
+          price: "Rp 23.000",
+          descriptionShort: "Obat batuk dengan kandungan OBH, Paracetamol, Pseudoephedrin HCl, dan Chlorphenamine maleat untuk meredakan batuk disertai gejala flu.",
+          descriptionFull: "OBH COMBI PLUS BATUK FLU merupakan obat batuk dengan kandungan OBH, Paracetamol, Pseudoephedrin HCl, dan Chlorphenamine maleat yang digunakan untuk meredakan batuk disertai gejala-gejala flu seperti demam, sakit kepala, hidung tersumbat, dan bersin-bersin. OBH bekerja sebagai ekspektoran atau peluruh dahak, Paracetamol digunakan sebagai pereda demam dan sakit kepala, Chlorpheniramine maleate bekerja sebagai antihistamin atau anti alergi untuk meredakan gejala alergi.\n\nDosis: Dewasa dan anak diatas 12 tahun : 3 kali sehari, 3 sendok takar (15 ml).\n\nAturan Pakai: Dikonsumsi sesudah makan."
+        },
+        3: {
+          name: "Vicks Vaporub 25 g",
+          category: "BALSEM",
+          image: "Vicks Vaporub 25 g.jpg",
+          price: "Rp 28.000",
+          descriptionShort: "Balsam gosok untuk meringankan gejala pilek dan batuk karena flu dengan kandungan Camphor, Menthol, dan Eucalyptus Oil.",
+          descriptionFull: "Vicks Vaporub adalah balsam gosok yang telah dikenal secara turun-temurun sebagai produk untuk meringankan gejala pilek dan batuk karena flu. Produk ini mengandung kombinasi bahan-bahan seperti Camphor, Menthol, dan Eucalyptus Oil yang memberikan sensasi hangat, melegakan, dan menenangkan. Camphor dan Menthol bekerja sebagai rubefacient yang memberikan rasa hangat pada kulit, sehingga membantu meringankan nyeri dan pegal. Uap dari Menthol dan Eucalyptus Oil saat dihirup berfungsi sebagai dekongestan yang membantu melegakan hidung tersumbat dan pernapasan.\n\nDosis: Gunakan secukupnya sesuai kebutuhan.\n\nAturan Pakai: Produk ini dapat digunakan dengan tiga cara: 1. Dioleskan: Gosokkan pada dada, leher, dan punggung untuk mendapatkan sensasi hangat yang melegakan. 2. Dihirup: Hirup uapnya secara langsung dari wadah untuk membantu melegakan hidung tersumbat. 3. Dicampur air panas: Larutkan 2 sendok teh Vicks Vaporub ke dalam semangkuk air panas (tidak mendidih), lalu hirup uapnya untuk melegakan pernapasan."
+        },
+        4: {
+          name: "Panadol Extra 10 Kaplet",
+          category: "DEMAM",
+          image: "Panadol Extra 10 Kaplet.jpg",
+          price: "Rp 17.600",
+          descriptionShort: "Obat pereda nyeri dan penurun demam dengan kombinasi Paracetamol 500 mg dan Caffeine 65 mg.",
+          descriptionFull: "PANADOL EXTRA adalah obat pereda nyeri dan penurun demam yang diformulasikan dengan kombinasi Paracetamol 500 mg dan Caffeine 65 mg. Paracetamol bekerja secara sentral di otak untuk mengurangi produksi prostaglandin, zat kimia yang memicu nyeri dan demam, sehingga efektif meredakan sakit kepala, sakit gigi, nyeri otot, nyeri sendi, serta menurunkan demam. Penambahan kafein dalam formulasi ini bukan hanya sebagai stimulan, melainkan untuk meningkatkan efek analgesik (peredaan nyeri) dari paracetamol, membuatnya bekerja lebih cepat dan lebih efektif dibandingkan paracetamol tunggal untuk nyeri tertentu. Panadol Extra umumnya digunakan untuk meredakan sakit kepala tegang, migrain, dan nyeri lainnya yang responsif terhadap kombinasi ini.\n\nDosis: Dewasa & Anak-anak > 12 tahun: 1 kaplet, ditelan dengan segelas air, 3-4 kali sehari. Tidak melebihi 8 kaplet dalam 24 jam. Minimum interval penggunaan dosis adalah 4 jam. Jangan diberikan kepada anak-anak di bawah umur 12 tahun. Jangan melebihi dosis yang dianjurkan.\n\nAturan Pakai: Sebelum atau sesudah makan."
+        },
+        5: {
+          name: "Promag 10 Tablet",
+          category: "ASAM LAMBUNG",
+          image: "Promag 10 Tablet.jpg",
+          price: "Rp 11.400",
+          descriptionShort: "Obat maag dalam bentuk tablet kunyah untuk membantu meredakan gejala sakit maag dan kembung dengan cepat.",
+          descriptionFull: "PROMAG TABLET adalah obat maag dalam bentuk tablet kunyah yang diformulasikan untuk membantu meredakan gejala sakit maag dan kembung dengan cepat. Promag bekerja melalui kombinasi Hydrotalcite dan Magnesium hydroxide, yaitu antasida yang berfungsi menetralkan asam lambung berlebih sehingga membantu meredakan rasa perih dan nyeri ulu hati. Kandungan Simethicone di dalamnya bekerja dengan cara mengurangi gelembung gas di dalam saluran cerna, sehingga membantu meredakan kembung dan rasa begah.\n\nDosis: Dewasa dan anak > 12 tahun: 3-4 kali sehari 1-2 tablet. Anak-anak 6-12 tahun: 3-4 kali sehari ½-1 tablet.\n\nAturan Pakai: Tablet dikunyah sebelum ditelan. Dianjurkan untuk diminum segera saat timbul gejala dan dilanjutkan 1-2 jam sebelum atau sesudah makan dan menjelang tidur."
+        },
+        6: {
+          name: "Entrostop 20 Tablet",
+          category: "DIARE",
+          image: "Entrostop 20 Tablet.jpg",
+          price: "Rp 21.500",
+          descriptionShort: "Obat untuk pengobatan simtomatik pada diare non-spesifik yang bekerja dengan cara menyerap racun dan memadatkan feses.",
+          descriptionFull: "ENTROSTOP adalah obat yang digunakan untuk pengobatan simtomatik pada diare non-spesifik. Obat ini bekerja dengan cara menyerap racun dan memadatkan feses di dalam saluran pencernaan. Entrostop bekerja melalui kombinasi dua zat aktif. Attapulgite adalah mineral lempung alami yang bekerja sebagai adsorben di dalam usus. Zat ini memiliki kemampuan untuk mengikat dan menyerap bakteri, toksin, serta air berlebih yang menyebabkan diare. Pectin adalah serat larut alami yang membantu menambah kepadatan feses dan memberikan efek menenangkan pada lapisan dinding usus yang mengalami iritasi.\n\nDosis: Dewasa dan anak-anak usia di atas 12 tahun: 2 tablet setiap setelah buang air besar, maksimum 12 tablet dalam 24 jam. Anak-anak usia 6-12 tahun: 1 tablet setiap setelah buang air besar, maksimum 6 tablet dalam 24 jam.\n\nAturan Pakai: Diminum setiap setelah buang air besar."
+        },
+        7: {
+          name: "Vitacimin 500 mg Rasa Lemon 2 Tablet",
+          category: "VITAMIN",
+          image: "Vitacimin 500 mg Rasa Lemon 2 Tablet.jpg",
+          price: "Rp 3.000",
+          descriptionShort: "Suplemen makanan yang mengandung vitamin C untuk membantu menjaga daya tahan tubuh.",
+          descriptionFull: "VITACIMIN LEMON merupakan suplemen makanan yang mengandung vitamin C. Vitamin ini membantu untuk menjaga daya tahan tubuh.\n\nDosis: 1-2 tablet per hari\n\nAturan Pakai: Diberikan sebelum atau sesudah makanan, dihisap perlahan dalam mulut."
+        }
+      };
+
+      // Fungsi untuk menampilkan produk di setiap tombol
+      function renderProducts(productIds = null) {
+        const container = document.getElementById('productContainer');
+        if (!container) return;
+        
+        // Jika productIds tidak diberikan, tampilkan semua produk
+        const idsToRender = productIds || Object.keys(products).map(Number);
+        
+        // Clear container
+        container.innerHTML = '';
+        
+        // Render produk
+        idsToRender.forEach(productId => {
+          const product = products[productId];
+          if (product) {
+            const buttonItem = document.createElement('div');
+            buttonItem.className = 'button-item';
+            buttonItem.innerHTML = `
+              <div class="product-display" id="productDisplay${productId}">
+                <img src="${product.image}" alt="${product.name}" class="product-image" id="productImage${productId}" />
+                <div class="product-title" id="productTitle${productId}">${product.name}</div>
+                <div class="product-category" id="productCategory${productId}">${product.category || ''}</div>
+                <div class="product-price" id="productPrice${productId}">${product.price}</div>
+                <button class="btn" onclick="openModal(${productId})">Pesan Sekarang</button>
+              </div>
+            `;
+            container.appendChild(buttonItem);
+          }
+        });
+      }
+
+      // Fungsi untuk filter dan sort produk
+      function filterProducts() {
+        const searchInput = document.getElementById('searchInput');
+        const categoryFilter = document.getElementById('categoryFilter');
+        const priceSort = document.getElementById('priceSort');
+        
+        const searchTerm = (searchInput?.value || '').toLowerCase().trim();
+        const selectedCategory = categoryFilter?.value || '';
+        const sortOrder = priceSort?.value || '';
+        
+        // Filter produk
+        let filteredProducts = Object.keys(products).map(Number).filter(productId => {
+          const product = products[productId];
+          if (!product) return false;
+          
+          // Filter by search term
+          const matchesSearch = !searchTerm || 
+            product.name.toLowerCase().includes(searchTerm) ||
+            product.category.toLowerCase().includes(searchTerm) ||
+            product.descriptionShort.toLowerCase().includes(searchTerm);
+          
+          // Filter by category
+          const matchesCategory = !selectedCategory || product.category === selectedCategory;
+          
+          return matchesSearch && matchesCategory;
+        });
+        
+        // Sort by price
+        if (sortOrder) {
+          filteredProducts.sort((a, b) => {
+            const priceA = parseInt(products[a].price.replace(/[^\d]/g, '')) || 0;
+            const priceB = parseInt(products[b].price.replace(/[^\d]/g, '')) || 0;
+            
+            if (sortOrder === 'asc') {
+              return priceA - priceB;
+            } else {
+              return priceB - priceA;
+            }
+          });
+        }
+        
+        // Render filtered products
+        renderProducts(filteredProducts);
+      }
+
+      // Cart Management
+      let cart = [];
+      let lastInputData = {
+        kamar: "",
+        message: ""
+      };
+
+      function addToCart(productId, quantity = 1, kamar = "", message = "") {
+        const product = products[productId];
+        if (!product) return;
+
+        // Cek apakah produk sudah ada di keranjang
+        const existingItem = cart.find(item => item.id === productId);
+        
+        if (existingItem) {
+          existingItem.quantity += quantity;
+          // Update data jika ada
+          if (kamar) existingItem.kamar = kamar;
+          if (message) existingItem.message = message;
+        } else {
+          cart.push({
+            id: productId,
+            name: product.name,
+            price: product.price,
+            quantity: quantity,
+            kamar: kamar || "",
+            message: message || ""
+          });
+        }
+
+        updateCartBadge();
+        showCartNotification();
+      }
+
+      function addToCartFromModal() {
+        if (!currentModalButton) return;
+        
+        const quantity = parseInt(document.getElementById("modalJumlah").value) || 1;
+        const kamar = document.getElementById("modalKamar").value.trim();
+        const message = document.getElementById("modalMessage").value.trim();
+
+        // Simpan data inputan untuk digunakan di produk berikutnya
+        if (kamar) lastInputData.kamar = kamar;
+        if (message) lastInputData.message = message;
+
+        // Tambahkan ke keranjang dengan data lengkap
+        addToCart(currentModalButton, quantity, kamar, message);
+        
+        // Tutup modal
+        closeModal();
+        
+        // Tampilkan notifikasi
+        alert("Produk berhasil ditambahkan ke keranjang!");
+      }
+
+      function removeFromCart(productId) {
+        const productIdNum = parseInt(productId);
+        cart = cart.filter(item => item.id !== productIdNum);
+        updateCartBadge();
+        renderCart();
+      }
+
+      function updateCartQuantity(productId, newQuantity) {
+        // Pastikan productId dan newQuantity adalah angka
+        const productIdNum = parseInt(productId);
+        newQuantity = parseInt(newQuantity);
+        
+        if (isNaN(productIdNum) || isNaN(newQuantity)) {
+          console.error("Invalid productId or quantity:", productId, newQuantity);
+          return;
+        }
+
+        const item = cart.find(item => item.id === productIdNum);
+        if (item) {
+          if (newQuantity <= 0) {
+            // Hapus item jika quantity <= 0
+            removeFromCart(productIdNum);
+          } else {
+            // Update quantity
+            item.quantity = newQuantity;
+            updateCartBadge();
+            renderCart();
+          }
+        } else {
+          console.error("Item not found in cart:", productIdNum);
+        }
+      }
+
+      function updateCartBadge() {
+        const badge = document.getElementById("cartBadge");
+        const totalItems = cart.reduce((sum, item) => sum + item.quantity, 0);
+        
+        if (totalItems > 0) {
+          badge.textContent = totalItems;
+          badge.style.display = "flex";
+        } else {
+          badge.style.display = "none";
+        }
+      }
+
+      function showCartNotification() {
+        // Bisa ditambahkan notifikasi toast jika diperlukan
+        console.log("Produk ditambahkan ke keranjang!");
+      }
+
+      function renderCart() {
+        const cartBody = document.getElementById("cartBody");
+        const cartTotal = document.getElementById("cartTotal");
+        const cartCheckoutBtn = document.getElementById("cartCheckoutBtn");
+
+        if (cart.length === 0) {
+          // Set innerHTML terlebih dahulu
+          if (cartBody) {
+            cartBody.innerHTML = '<div class="cart-empty" id="cartEmpty">Keranjang masih kosong</div>';
+          }
+          // Setelah innerHTML di-set, akses elemen yang baru dibuat
+          const cartEmpty = document.getElementById("cartEmpty");
+          if (cartEmpty) {
+            cartEmpty.style.display = "block";
+          }
+          if (cartTotal) {
+            cartTotal.style.display = "none";
+          }
+          if (cartCheckoutBtn) {
+            cartCheckoutBtn.style.display = "none";
+          }
+          return;
+        }
+
+        // Pastikan cartEmpty disembunyikan jika ada
+        const cartEmpty = document.getElementById("cartEmpty");
+        if (cartEmpty) {
+          cartEmpty.style.display = "none";
+        }
+        if (cartTotal) {
+          cartTotal.style.display = "flex";
+        }
+        if (cartCheckoutBtn) {
+          cartCheckoutBtn.style.display = "block";
+        }
+
+        let html = "";
+        let totalPrice = 0;
+
+        cart.forEach(item => {
+          const priceNum = parseInt(item.price.replace(/[^\d]/g, ""));
+          const itemTotal = priceNum * item.quantity;
+          totalPrice += itemTotal;
+
+          html += `
+            <div class="cart-item" data-product-id="${item.id}">
+              <div class="cart-item-info">
+                <div class="cart-item-name">${item.name}</div>
+                <div class="cart-item-price">${item.price} x ${item.quantity} = Rp ${itemTotal.toLocaleString('id-ID')}</div>
+                ${item.kamar ? `<div style="font-size: 12px; color: #666; margin-top: 5px;">📍 ${item.kamar}</div>` : ''}
+                ${item.message ? `<div style="font-size: 12px; color: #666; margin-top: 5px;">💬 ${item.message.substring(0, 50)}${item.message.length > 50 ? '...' : ''}</div>` : ''}
+              </div>
+              <div class="cart-item-actions">
+                <div class="cart-item-quantity">
+                  <button class="quantity-btn" type="button" onclick="updateCartQuantity(${item.id}, ${item.quantity - 1})">-</button>
+                  <span class="quantity-display">${item.quantity}</span>
+                  <button class="quantity-btn" type="button" onclick="updateCartQuantity(${item.id}, ${item.quantity + 1})">+</button>
+                </div>
+                <button class="cart-remove-btn" type="button" onclick="removeFromCart(${item.id})">Hapus</button>
+              </div>
+            </div>
+          `;
+        });
+
+        if (cartBody) {
+          cartBody.innerHTML = html;
+        }
+        const cartTotalPrice = document.getElementById("cartTotalPrice");
+        if (cartTotalPrice) {
+          cartTotalPrice.textContent = `Rp ${totalPrice.toLocaleString('id-ID')}`;
+        }
+      }
+
+      function openCartModal() {
+        const modal = document.getElementById("cartModalOverlay");
+        renderCart();
+        modal.classList.add("show");
+        document.body.style.overflow = "hidden";
+      }
+
+      function closeCartModal() {
+        const modal = document.getElementById("cartModalOverlay");
+        modal.classList.remove("show");
+        document.body.style.overflow = "auto";
+      }
+
+      function closeCartModalOnOverlay(event) {
+        if (event.target.id === "cartModalOverlay") {
+          closeCartModal();
+        }
+      }
+
+      function checkoutCart() {
+        if (cart.length === 0) return;
+
+        // Ambil kamar dari item pertama atau prompt jika tidak ada
+        let kamar = "";
+        const firstItemWithKamar = cart.find(item => item.kamar);
+        if (firstItemWithKamar) {
+          kamar = firstItemWithKamar.kamar;
+        } else if (lastInputData.kamar) {
+          kamar = lastInputData.kamar;
+        } else {
+          kamar = prompt("Masukkan Nomor Kamar / Alamat:");
+          if (kamar === null) return; // User membatalkan
+        }
+
+        // Buat pesan dari semua item di keranjang
+        let message = "Pemesanan Obat:\n\n";
+        
+        cart.forEach((item, index) => {
+          message += `${index + 1}. ${item.name}\n`;
+          message += `   Jumlah: ${item.quantity}\n`;
+          const priceNum = parseInt(item.price.replace(/[^\d]/g, ""));
+          const itemTotal = priceNum * item.quantity;
+          message += `   Harga: ${item.price} x ${item.quantity} = Rp ${itemTotal.toLocaleString('id-ID')}\n`;
+          if (item.message) {
+            message += `   Catatan: ${item.message}\n`;
+          }
+          message += `\n`;
+        });
+
+        message += `Nomor Kamar/Alamat: ${kamar}\n\n`;
+        message += "Terima kasih atas pesanannya!";
+
+        const whatsappUrl = `https://wa.me/${PHONE_NUMBER}?text=${encodeURIComponent(message)}`;
+        window.open(whatsappUrl, "_blank");
+
+        // Kosongkan keranjang setelah checkout
+        cart = [];
+        updateCartBadge();
+        closeCartModal();
+      }
+
+      // Panggil saat halaman dimuat
+      window.addEventListener('DOMContentLoaded', function() {
+        renderProducts();
+        // Show pesan section by default
+        document.getElementById('section-pesan').style.display = 'block';
+        document.getElementById('section-pesan').classList.add('active');
+        document.getElementById('section-home').style.display = 'none';
+      });
+      
+      // Tambahkan event listener untuk search input
+      document.addEventListener('DOMContentLoaded', function() {
+        const searchInput = document.getElementById('searchInput');
+        if (searchInput) {
+          searchInput.addEventListener('input', filterProducts);
+        }
+      });
+
+      let currentModalButton = null;
+
+      function openModal(buttonNumber) {
+        currentModalButton = buttonNumber;
+        const modal = document.getElementById("modalOverlay");
+        const modalTitle = document.getElementById("modalTitle");
+        const product = products[buttonNumber];
+        
+        // Update modal title
+        if (product) {
+          modalTitle.textContent = `Form Pemesanan - ${product.name}`;
+        } else {
+          modalTitle.textContent = `Form Pemesanan - Tombol ${buttonNumber}`;
+        }
+        
+        // Update detail produk di modal
+        const modalProductInfo = document.getElementById("modalProductInfo");
+        const modalProductImg = document.getElementById("modalProductImg");
+        const modalProductName = document.getElementById("modalProductName");
+        const modalProductPrice = document.getElementById("modalProductPrice");
+        const modalProductDescription = document.getElementById("modalProductDescription");
+        
+        if (product && modalProductInfo) {
+          // Tampilkan detail produk
+          if (modalProductImg) {
+            modalProductImg.src = product.image;
+            modalProductImg.alt = product.name;
+          }
+          if (modalProductName) {
+            modalProductName.textContent = product.name;
+          }
+          if (modalProductPrice) {
+            modalProductPrice.textContent = product.price;
+          }
+          if (modalProductDescription) {
+            modalProductDescription.textContent = product.descriptionFull || product.descriptionShort || "";
+          }
+          if (modalProductInfo) {
+            modalProductInfo.style.display = "block";
+          }
+        } else {
+          // Sembunyikan detail produk jika tidak ada
+          if (modalProductInfo) {
+            modalProductInfo.style.display = "none";
+          }
+        }
+        
+        // Reset quantity, tapi isi otomatis kamar dan pesan dari inputan terakhir
+        document.getElementById("modalQuantity").textContent = "1";
+        document.getElementById("modalJumlah").value = "1";
+        document.getElementById("modalKamar").value = lastInputData.kamar || "";
+        document.getElementById("modalMessage").value = lastInputData.message || "";
+        
+        // Hitung dan tampilkan total harga awal
+        calculateModalTotalPrice();
+        
+        modal.classList.add("show");
+        document.body.style.overflow = "hidden";
+      }
+
+      function closeModal() {
+        const modal = document.getElementById("modalOverlay");
+        modal.classList.remove("show");
+        document.body.style.overflow = "auto";
+        currentModalButton = null;
+      }
+
+      function closeModalOnOverlay(event) {
+        if (event.target.id === "modalOverlay") {
+          closeModal();
+        }
+      }
+
+      // Fungsi untuk menghitung dan menampilkan total harga di modal
+      function calculateModalTotalPrice() {
+        if (!currentModalButton) return;
+        
+        const product = products[currentModalButton];
+        if (!product) return;
+
+        const quantityDisplay = document.getElementById("modalQuantity");
+        const totalPriceDisplay = document.getElementById("modalTotalPrice");
+        
+        if (!quantityDisplay || !totalPriceDisplay) return;
+
+        const quantity = parseInt(quantityDisplay.textContent) || 1;
+        const priceStr = product.price.replace(/[^\d]/g, ""); // Hapus semua karakter non-digit
+        const pricePerUnit = parseInt(priceStr) || 0;
+        const totalPrice = pricePerUnit * quantity;
+
+        // Format harga dengan pemisah ribuan
+        totalPriceDisplay.textContent = `Rp ${totalPrice.toLocaleString('id-ID')}`;
+      }
+
+      function increaseQuantity(buttonNumber) {
+        if (buttonNumber === "modal") {
+          const quantityDisplay = document.getElementById("modalQuantity");
+          const jumlahInput = document.getElementById("modalJumlah");
+          let currentQuantity = parseInt(quantityDisplay.textContent) || 1;
+          currentQuantity++;
+          quantityDisplay.textContent = currentQuantity;
+          jumlahInput.value = currentQuantity;
+          calculateModalTotalPrice(); // Update harga setelah quantity berubah
+        } else {
+          const quantityDisplay = document.getElementById(`quantity${buttonNumber}`);
+          const jumlahInput = document.getElementById(`jumlah${buttonNumber}`);
+          let currentQuantity = parseInt(quantityDisplay.textContent) || 1;
+          currentQuantity++;
+          quantityDisplay.textContent = currentQuantity;
+          jumlahInput.value = currentQuantity;
+        }
+      }
+
+      function decreaseQuantity(buttonNumber) {
+        if (buttonNumber === "modal") {
+          const quantityDisplay = document.getElementById("modalQuantity");
+          const jumlahInput = document.getElementById("modalJumlah");
+          let currentQuantity = parseInt(quantityDisplay.textContent) || 1;
+          if (currentQuantity > 1) {
+            currentQuantity--;
+            quantityDisplay.textContent = currentQuantity;
+            jumlahInput.value = currentQuantity;
+            calculateModalTotalPrice(); // Update harga setelah quantity berubah
+          }
+        } else {
+          const quantityDisplay = document.getElementById(`quantity${buttonNumber}`);
+          const jumlahInput = document.getElementById(`jumlah${buttonNumber}`);
+          let currentQuantity = parseInt(quantityDisplay.textContent) || 1;
+          if (currentQuantity > 1) {
+            currentQuantity--;
+            quantityDisplay.textContent = currentQuantity;
+            jumlahInput.value = currentQuantity;
+          }
+        }
+      }
+
+      function resetQuantity(buttonNumber) {
+        const quantityDisplay = document.getElementById(`quantity${buttonNumber}`);
+        const jumlahInput = document.getElementById(`jumlah${buttonNumber}`);
+        quantityDisplay.textContent = "1";
+        jumlahInput.value = "1";
+      }
+
+      function sendToWhatsAppFromModal() {
+        if (!currentModalButton) return;
+        
+        const messageInput = document.getElementById("modalMessage");
+        const jumlahInput = document.getElementById("modalJumlah");
+        const kamarInput = document.getElementById("modalKamar");
+
+        const userInput = messageInput.value.trim();
+        const jumlah = jumlahInput.value.trim();
+        const kamar = kamarInput.value.trim();
+
+        // Ambil nama produk dari data produk
+        const product = products[currentModalButton];
+        const productName = product ? product.name : `Tombol ${currentModalButton}`;
+        
+        let message = productName;
+
+        // Tambahkan data dari tabel jika ada
+        if (jumlah !== "" || kamar !== "") {
+          let tableData = "";
+          if (jumlah !== "") {
+            tableData += `Jumlah: ${jumlah}`;
+          }
+          if (kamar !== "") {
+            if (tableData !== "") tableData += ", ";
+            tableData += `Nomor Kamar/Alamat: ${kamar}`;
+          }
+          message = `${template}\n${tableData}`;
+        }
+
+        // Jika ada inputan user dari textbox, tambahkan ke template
+        if (userInput !== "") {
+          if (message === template) {
+            message = `${template} ${userInput}`;
+          } else {
+            message = `${message}\n${userInput}`;
+          }
+        }
+
+        const whatsappUrl = `https://wa.me/${PHONE_NUMBER}?text=${encodeURIComponent(
+          message
+        )}`;
+
+        // Buka WhatsApp di tab baru
+        window.open(whatsappUrl, "_blank");
+        
+        // Tutup modal setelah kirim
+        closeModal();
+      }
+
+      async function sendToWhatsApp(buttonNumber) {
+        const messageInput = document.getElementById(`message${buttonNumber}`);
+        const jumlahInput = document.getElementById(`jumlah${buttonNumber}`);
+        const kamarInput = document.getElementById(`kamar${buttonNumber}`);
+
+        const userInput = messageInput.value.trim();
+        const jumlah = jumlahInput.value.trim();
+        const kamar = kamarInput.value.trim();
+
+        // Gabungkan template tombol dengan inputan user
+        const template = `tombol ${buttonNumber}`;
+        let message = template;
+
+        // Tambahkan data dari tabel jika ada
+        if (jumlah !== "" || kamar !== "") {
+          let tableData = "";
+          if (jumlah !== "") {
+            tableData += `Jumlah: ${jumlah}`;
+          }
+          if (kamar !== "") {
+            if (tableData !== "") tableData += ", ";
+            tableData += `Nomor Kamar/Alamat: ${kamar}`;
+          }
+          message = `${template}\n${tableData}`;
+        }
+
+        // Jika ada inputan user dari textbox, tambahkan ke template
+        if (userInput !== "") {
+          if (message === template) {
+            message = `${template} ${userInput}`;
+          } else {
+            message = `${message}\n${userInput}`;
+          }
+        }
+
+        const whatsappUrl = `https://wa.me/${PHONE_NUMBER}?text=${encodeURIComponent(
+          message
+        )}`;
+
+        // Buka WhatsApp di tab baru
+        window.open(whatsappUrl, "_blank");
+      }
+
+      // Event delegation untuk tombol-tombol di cart
+      // Setup event listener sekali saat halaman dimuat
+      let cartEventSetup = false;
+      
+      function setupCartEventListeners() {
+        if (cartEventSetup) return; // Hanya setup sekali
+        
+        const cartBody = document.getElementById('cartBody');
+        if (cartBody) {
+          cartBody.addEventListener('click', function(e) {
+            const target = e.target;
+            
+            // Handle tombol kurang (-)
+            if (target.classList.contains('quantity-btn') && target.textContent.trim() === '-') {
+              const cartItem = target.closest('.cart-item');
+              if (cartItem) {
+                const quantityDisplay = cartItem.querySelector('.quantity-display');
+                if (quantityDisplay) {
+                  const currentQty = parseInt(quantityDisplay.textContent);
+                  const productId = getProductIdFromCartItem(cartItem);
+                  if (productId !== null && !isNaN(currentQty)) {
+                    updateCartQuantity(productId, currentQty - 1);
+                  }
+                }
+              }
+              e.preventDefault();
+              e.stopPropagation();
+              return false;
+            }
+            
+            // Handle tombol tambah (+)
+            if (target.classList.contains('quantity-btn') && target.textContent.trim() === '+') {
+              const cartItem = target.closest('.cart-item');
+              if (cartItem) {
+                const quantityDisplay = cartItem.querySelector('.quantity-display');
+                if (quantityDisplay) {
+                  const currentQty = parseInt(quantityDisplay.textContent);
+                  const productId = getProductIdFromCartItem(cartItem);
+                  if (productId !== null && !isNaN(currentQty)) {
+                    updateCartQuantity(productId, currentQty + 1);
+                  }
+                }
+              }
+              e.preventDefault();
+              e.stopPropagation();
+              return false;
+            }
+            
+            // Handle tombol hapus
+            if (target.classList.contains('cart-remove-btn')) {
+              const cartItem = target.closest('.cart-item');
+              if (cartItem) {
+                const productId = getProductIdFromCartItem(cartItem);
+                if (productId !== null) {
+                  removeFromCart(productId);
+                }
+              }
+              e.preventDefault();
+              e.stopPropagation();
+              return false;
+            }
+          });
+          cartEventSetup = true;
+        }
+      }
+
+      // Setup event listener saat halaman dimuat
+      document.addEventListener('DOMContentLoaded', function() {
+        setupCartEventListeners();
+      });
+
+      // Helper function untuk mendapatkan productId dari cart item
+      function getProductIdFromCartItem(cartItem) {
+        // Gunakan data attribute jika tersedia
+        const productId = cartItem.getAttribute('data-product-id');
+        if (productId) {
+          return parseInt(productId);
+        }
+        // Fallback: cari dari onclick attribute
+        const buttons = cartItem.querySelectorAll('button[onclick]');
+        for (let btn of buttons) {
+          const onclickAttr = btn.getAttribute('onclick');
+          if (onclickAttr) {
+            const match = onclickAttr.match(/updateCartQuantity\((\d+)/) || 
+                         onclickAttr.match(/removeFromCart\((\d+)/);
+            if (match && match[1]) {
+              return parseInt(match[1]);
+            }
+          }
+        }
+        return null;
+      }
+    </script>
+  </body>
+</html>

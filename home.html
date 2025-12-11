@@ -1,0 +1,549 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Apotek Asrama - Solusi Kesehatan Cepat & Terpercaya</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            overflow-x: hidden;
+        }
+
+        /* Header & Navigation */
+        header {
+            background: #fff;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            padding: 1rem 0;
+        }
+
+        nav {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: #2e7d32;
+            text-decoration: none;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+            list-style: none;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: #333;
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+
+        .nav-links a:hover {
+            color: #2e7d32;
+        }
+
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(135deg, #2e7d32 0%, #4caf50 20%, #ffffff 100%);
+            color: #333;
+            padding: 5rem 2rem;
+            text-align: center;
+        }
+
+        .hero-content {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .hero h1 {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            line-height: 1.2;
+            color: #2e7d32;
+        }
+
+        .hero p {
+            font-size: 1.2rem;
+            margin-bottom: 2rem;
+            color: #555;
+        }
+
+        .cta-buttons {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .btn {
+            padding: 1rem 2rem;
+            font-size: 1rem;
+            font-weight: bold;
+            border: none;
+            border-radius: 50px;
+            cursor: pointer;
+            transition: all 0.3s;
+            text-decoration: none;
+            display: inline-block;
+        }
+
+        .btn-primary {
+            background: white;
+            color: #2e7d32;
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+        }
+
+        .btn-secondary {
+            background: transparent;
+            color: white;
+            border: 2px solid white;
+        }
+
+        .btn-secondary:hover {
+            background: white;
+            color: #2e7d32;
+        }
+
+        /* Container */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        section {
+            padding: 4rem 0;
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 2rem;
+            margin-bottom: 3rem;
+            color: #2e7d32;
+        }
+
+        /* Highlight Layanan */
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .service-card {
+            background: #f8f9fa;
+            padding: 2rem;
+            border-radius: 15px;
+            text-align: center;
+            transition: all 0.3s;
+            border: 2px solid transparent;
+        }
+
+        .service-card:hover {
+            transform: translateY(-5px);
+            border-color: #2e7d32;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+        }
+
+        .service-icon {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+        }
+
+        .service-card h3 {
+            color: #2e7d32;
+            margin-bottom: 0.5rem;
+        }
+
+        /* Kategori Produk */
+        .products-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1.5rem;
+            margin-top: 2rem;
+        }
+
+        .product-card {
+            background: white;
+            border: 2px solid #e0e0e0;
+            border-radius: 10px;
+            padding: 1.5rem;
+            text-align: center;
+            transition: all 0.3s;
+        }
+
+        .product-card:hover {
+            border-color: #2e7d32;
+            box-shadow: 0 5px 15px rgba(46, 125, 50, 0.2);
+        }
+
+        .product-icon {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+        }
+
+        /* Fitur Khusus */
+        .features {
+            background: #f8f9fa;
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .feature-item {
+            background: white;
+            padding: 2rem;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            gap: 1.5rem;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+        }
+
+        .feature-icon {
+            font-size: 2.5rem;
+            color: #2e7d32;
+        }
+
+        /* Testimoni */
+        .testimonials-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .testimonial-card {
+            background: white;
+            padding: 2rem;
+            border-radius: 15px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            border-left: 4px solid #2e7d32;
+        }
+
+        .testimonial-text {
+            font-style: italic;
+            margin-bottom: 1rem;
+            color: #555;
+        }
+
+        .testimonial-author {
+            font-weight: bold;
+            color: #2e7d32;
+        }
+
+        .stars {
+            color: #ffc107;
+            margin-bottom: 0.5rem;
+        }
+
+        /* Edukasi Kesehatan */
+        .education {
+            background: #f8f9fa;
+        }
+
+        .articles-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .article-card {
+            background: white;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+            transition: all 0.3s;
+        }
+
+        .article-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0,0,0,0.15);
+        }
+
+        .article-content {
+            padding: 1.5rem;
+        }
+
+        .article-card h3 {
+            color: #2e7d32;
+            margin-bottom: 0.5rem;
+        }
+
+        .article-card p {
+            color: #666;
+            font-size: 0.95rem;
+        }
+
+        /* Footer */
+        footer {
+            background: #1b5e20;
+            color: white;
+            text-align: center;
+            padding: 2rem;
+            margin-top: 4rem;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 2rem;
+            }
+
+            .hero p {
+                font-size: 1rem;
+            }
+
+            .nav-links {
+                display: none;
+            }
+
+            .cta-buttons {
+                flex-direction: column;
+                align-items: stretch;
+            }
+
+            .btn {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <nav>
+            <a href="home.html" class="logo">💊 Apotek Asrama</a>
+            <ul class="nav-links">
+                <li><a href="home.html">Beranda</a></li>
+                <li><a href="layanan.html">Layanan</a></li>
+                <li><a href="produk.html">Produk</a></li>
+                <li><a href="aboutus.html">Tentang Kami</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero" id="home">
+        <div class="hero-content">
+            <h1>Apotek Asrama – Solusi Kesehatan Cepat & Terpercaya</h1>
+            <p>
+                Menyediakan obat, vitamin, dan pengantaran langsung ke kamar asrama. 
+                Kesehatan Anda adalah prioritas kami, dengan pelayanan cepat dan profesional.
+            </p>
+            <div class="cta-buttons">
+                <a href="produk.html" class="btn btn-primary">📦 Pesan Obat</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Highlight Layanan Utama -->
+    <section id="layanan" class="container">
+        <h2 class="section-title">Layanan Utama Kami</h2>
+        <div class="services-grid">
+            <div class="service-card">
+                <div class="service-icon">💊</div>
+                <h3>Obat Bebas & Resep</h3>
+                <p>Lengkap untuk kebutuhan kesehatan sehari-hari dan sesuai resep dokter</p>
+            </div>
+            <div class="service-card">
+                <div class="service-icon">🚚</div>
+                <h3>Antar ke Kamar Asrama</h3>
+                <p>Pengantaran langsung ke kamar Anda, tanpa perlu keluar asrama</p>
+            </div>
+            <div class="service-card">
+                <div class="service-icon">✅</div>
+                <h3>Stok Real-Time</h3>
+                <p>Informasi ketersediaan stok real-time melalui platform kami</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Kategori Produk -->
+    <section id="produk" class="container">
+        <h2 class="section-title">Kategori Produk</h2>
+        <div class="products-grid">
+            <div class="product-card">
+                <div class="product-icon">🌡️</div>
+                <h3>Obat Demam & Flu</h3>
+                <p>Paracetamol, Ibuprofen, dll</p>
+            </div>
+            <div class="product-card">
+                <div class="product-icon">💉</div>
+                <h3>Pereda Nyeri</h3>
+                <p>Obat sakit kepala, nyeri otot</p>
+            </div>
+            <div class="product-card">
+                <div class="product-icon">🍽️</div>
+                <h3>Obat Pencernaan</h3>
+                <p>Antasida, obat diare, dll</p>
+            </div>
+            <div class="product-card">
+                <div class="product-icon">💪</div>
+                <h3>Vitamin & Suplemen</h3>
+                <p>Vitamin C, D, multivitamin</p>
+            </div>
+            <div class="product-card">
+                <div class="product-icon">🩺</div>
+                <h3>Alat Kesehatan</h3>
+                <p>Masker, test kit, termometer</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Fitur Khusus Apotek Asrama -->
+    <section class="features">
+        <div class="container">
+            <h2 class="section-title">Fitur Khusus Apotek Asrama</h2>
+            <div class="features-grid">
+                <div class="feature-item">
+                    <div class="feature-icon">⚡</div>
+                    <div>
+                        <h3>Pengantaran Cepat</h3>
+                        <p>Diantar dalam waktu kurang dari 15 menit ke kamar Anda</p>
+                    </div>
+                </div>
+                <div class="feature-item">
+                    <div class="feature-icon">🌙</div>
+                    <div>
+                        <h3>Buka Hingga Malam</h3>
+                        <p>Melayani hingga jam 22:00 untuk kebutuhan darurat</p>
+                    </div>
+                </div>
+                <div class="feature-item">
+                    <div class="feature-icon">💰</div>
+                    <div>
+                        <h3>Harga Terjangkau</h3>
+                        <p>Harga khusus untuk mahasiswa dan penghuni asrama</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimoni Pengguna -->
+    <section class="container">
+        <h2 class="section-title">Apa Kata Penghuni Asrama</h2>
+        <div class="testimonials-grid">
+            <div class="testimonial-card">
+                <div class="stars">⭐⭐⭐⭐⭐</div>
+                <p class="testimonial-text">
+                    "Pelayanan sangat cepat! Obat sampai kurang dari 15 menit. Stafnya juga ramah dan informatif."
+                </p>
+                <p class="testimonial-author">– Naccir Sidabutar, Asrama Joseph LT1</p>
+            </div>
+            <div class="testimonial-card">
+                <div class="stars">⭐⭐⭐⭐⭐</div>
+                <p class="testimonial-text">
+                    "Harga sangat terjangkau untuk mahasiswa. Pelayanan cepat dan ramah."
+                </p>
+                <p class="testimonial-author">– Arnold Setiawan Manullang, Asrama Joseph LT3</p>
+            </div>
+            <div class="testimonial-card">
+                <div class="stars">⭐⭐⭐⭐⭐</div>
+                <p class="testimonial-text">
+                    "Sering buka hingga malam sangat membantu! Obat selalu tersedia saat dibutuhkan."
+                </p>
+                <p class="testimonial-author">– Jovant Vincent Silaban, Asrama Samuel LT1 B</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Bagian Edukasi Kesehatan -->
+    <section class="education">
+        <div class="container">
+            <h2 class="section-title">Tips Kesehatan untuk Mahasiswa</h2>
+            <div class="articles-grid">
+                <div class="article-card">
+                    <div class="article-content">
+                        <h3>💊 Tips Mengonsumsi Obat yang Tepat</h3>
+                        <p>
+                            Selalu baca aturan pakai, minum sesuai jadwal, dan jangan menghentikan pengobatan 
+                            tanpa konsultasi dengan apoteker atau dokter.
+                        </p>
+                    </div>
+                </div>
+                <div class="article-card">
+                    <div class="article-content">
+                        <h3>🌿 Menjaga Daya Tahan Tubuh</h3>
+                        <p>
+                            Kombinasikan vitamin C, D, dan zinc dengan pola makan seimbang, istirahat cukup, 
+                            dan olahraga teratur untuk daya tahan tubuh optimal.
+                        </p>
+                    </div>
+                </div>
+                <div class="article-card">
+                    <div class="article-content">
+                        <h3>🏥 Kapan Harus ke Dokter?</h3>
+                        <p>
+                            Jika gejala berlangsung lebih dari 3 hari, demam tinggi, atau gejala memburuk, 
+                            segera konsultasi ke dokter. Apotek Asrama siap membantu rujukan.
+                        </p>
+                    </div>
+                </div>
+                <div class="article-card">
+                    <div class="article-content">
+                        <h3>🥤 Hidrasi yang Cukup</h3>
+                        <p>
+                            Minum minimal 8 gelas air sehari, terutama saat belajar dan beraktivitas. 
+                            Jangan tunggu haus untuk minum.
+                        </p>
+                    </div>
+                </div>
+                <div class="article-card">
+                    <div class="article-content">
+                        <h3>😴 Pentingnya Tidur Berkualitas</h3>
+                        <p>
+                            Tidur 7-9 jam per hari sangat penting untuk pemulihan tubuh, konsentrasi belajar, 
+                            dan sistem imun yang kuat.
+                        </p>
+                    </div>
+                </div>
+                <div class="article-card">
+                    <div class="article-content">
+                        <h3>🍎 Pola Makan Seimbang</h3>
+                        <p>
+                            Konsumsi makanan bergizi dengan porsi seimbang: karbohidrat, protein, sayur, 
+                            dan buah setiap hari untuk kesehatan optimal.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <p>&copy; 2024 Apotek Asrama. Melayani dengan Hati untuk Kesehatan Anda.</p>
+    </footer>
+</body>
+</html>
+
